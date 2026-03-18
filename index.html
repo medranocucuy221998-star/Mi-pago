@@ -5,133 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Savage Bot | Pago Seguro</title>
     <style>
+        /* FONDO CON GOKU DE DRAGON BALL SUPER */
         body {
-            background-color: #0b0e14;
-            margin: 0;
-            height: 100vh;
+            background-color: #0b0e14; /* Color de respaldo */
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', sans-serif;
-            color: white;
-            /* IMAGEN DE ZEUS CON ENLACE DIRECTO DE RESPALDO */
-            background-image: url('https://i.imgur.com/8397SjE.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Evita barras de desplazamiento */
+            
+            /* ENLACE DIRECTO Y ESTABLE A LA IMAGEN DE GOKU */
+            background-image: url('https://i.ibb.co/LzNf8Xf/zeus.jpg'); /* Enlace de respaldo */
+            background-image: url('https://w0.peakpx.com/wallpaper/232/900/HD-wallpaper-goku-ultra-instinct-dragon-ball-super-goku-migatte-no-gokui-ultra-instinct-w-background.jpg');
+            background-size: cover; /* La imagen cubre toda la pantalla */
+            background-position: center; /* Centra la imagen */
+            background-repeat: no-repeat; /* No repite la imagen */
         }
 
-        /* Capa de oscuridad para que el Zeus se vea de fondo pero el formulario resalte */
+        /* Capa de oscuridad para que el formulario resalte sobre la imagen */
         body::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Capa negra al 50% de opacidad */
+            z-index: 1; /* Detrás del contenido principal */
         }
 
+        /* ESTILOS DEL CONTENEDOR PRINCIPAL */
         .container {
             position: relative;
-            z-index: 10;
-            background: rgba(21, 25, 33, 0.85);
+            z-index: 10; /* Por encima de la capa oscura */
+            background-color: rgba(21, 25, 33, 0.9); /* Fondo oscuro semitransparente */
             padding: 30px;
-            border-radius: 25px;
+            border-radius: 20px;
             width: 340px;
-            border: 1px solid #00f2ff;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
-            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 165, 0, 0.4); /* Borde naranja neón sutil */
+            box-shadow: 0 10px 40px rgba(255, 165, 0, 0.3); /* Sombra naranja neón */
+            backdrop-filter: blur(10px); /* Efecto de desenfoque detrás de la caja */
             text-align: center;
         }
 
-        .card-preview {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            padding: 20px;
+        /* ESTILOS DEL VISUAL DE LA TARJETA */
+        .card-visual {
+            background: linear-gradient(135deg, #1a1a40 0%, #001030 100%); /* Degradado oscuro y profundo */
+            padding: 25px;
             border-radius: 15px;
             margin-bottom: 25px;
-            border: 1px solid #334155;
+            border: 1px solid rgba(255, 165, 0, 0.5);
             text-align: left;
+            position: relative;
         }
 
-        .chip { width: 42px; height: 32px; background: #fbbf24; border-radius: 5px; margin-bottom: 15px; }
-        
-        label { font-size: 11px; color: #00f2ff; text-transform: uppercase; display: block; margin-top: 15px; text-align: left; font-weight: bold; letter-spacing: 1px; }
-        
-        input { 
-            width: 100%; padding: 15px; margin-top: 8px; 
-            background: rgba(15, 23, 42, 0.9); border: 1px solid #334155; 
-            border-radius: 12px; color: #fff; font-size: 16px; box-sizing: border-box; 
+        /* CHIP DE LA TARJETA EN DORADO */
+        .chip {
+            width: 45px;
+            height: 35px;
+            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+            border-radius: 6px;
+            margin-bottom: 20px;
         }
 
-        input:focus { border-color: #00f2ff; outline: none; }
-
-        button { 
-            width: 100%; padding: 18px; background: #0052ff; 
-            border: none; border-radius: 12px; color: white; 
-            font-weight: bold; cursor: pointer; margin-top: 30px; 
-            text-transform: uppercase; font-size: 15px; letter-spacing: 1px;
+        /* NÚMERO DE TARJETA EN NEÓN BLANCO */
+        .card-number-display {
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            color: #fff;
+            font-family: 'Courier New', monospace; /* Tipografía de tarjeta clásica */
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Resplandor */
+            margin-bottom: 10px;
         }
 
-        /* Área del contador */
-        #countdown-view { display: none; padding: 20px; }
-        .big-number { font-size: 70px; color: #00f2ff; font-weight: bold; margin: 10px 0; }
+        /* ETIQUETAS DE LOS CAMPOS EN NARANJA NEÓN */
+        label {
+            font-size: 13px;
+            color: #ffa500; /* Naranja neón */
+            text-transform: uppercase;
+            display: block;
+            margin-top: 20px;
+            text-align: left;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* ESTILOS DE LOS CAMPOS DE ENTRADA */
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-top: 8px;
+            background-color: rgba(8, 10, 15, 0.8);
+            border: 1px solid #ffa500;
+            border-radius: 10px;
+            color: #fff; /* Texto en blanco para legibilidad */
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        /* EFECTO DE RESPLANDOR AL ENFOCAR */
+        input:focus {
+            border-color: #fff;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+            outline: none;
+        }
+
+        /* BOTÓN DE ACCIÓN EN AZUL SAVAGE CON SOMBRA NEÓN */
+        button {
+            width: 100%;
+            padding: 18px;
+            background-color: #0052ff; /* Azul savage */
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 82, 255, 0.4);
+        }
+
+        /* EFECTO HOVER EN EL BOTÓN */
+        button:hover {
+            background-color: #fff;
+            color: #0052ff;
+            transform: translateY(-2px); /* Pequeño salto hacia arriba */
+        }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div id="form-view">
-        <div class="card-preview">
+    <div class="container">
+        <div class="card-visual">
             <div class="chip"></div>
-            <div style="font-size: 1.3rem; letter-spacing: 3px; font-family: monospace;">#### #### #### ####</div>
-            <div style="font-size: 10px; color: #94a3b8; margin-top: 15px;">SAVAGE BOT | @SavageOficialBot</div>
+            <div class="card-number-display">#### #### #### ####</div>
+            <div style="font-size: 10px; color: #aaa;">Savage Bot | Pago Seguro<br>@SavageOficialBot</div>
         </div>
         
-        <form id="payForm">
-            <label>NÚMERO DE TARJETA</label>
-            <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
+        <form id="paymentForm">
+            <label>▶ NÚMERO DE TARJETA</label>
+            <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242 4242... #### #### ####" required>
             
-            <div style="display: flex; gap: 12px;">
-                <div style="flex:1">
-                    <label>MES</label>
-                    <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="MM" maxlength="2" required>
-                </div>
-                <div style="flex:1">
-                    <label>AÑO</label>
-                    <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="AA" maxlength="2" required>
-                </div>
+            <label>▶ FECHA DE VENCIMIENTO</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="MM" maxlength="2" required style="flex:1">
+                <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="AA" maxlength="2" required style="flex:1">
             </div>
 
             <input type="hidden" name="cc-name" autocomplete="cc-name" value="Antonio Corrales">
 
-            <button type="submit">VINCULAR AHORA</button>
+            <button type="submit">VINCULAR TARJETA</button>
         </form>
     </div>
 
-    <div id="countdown-view">
-        <h3 style="color: #94a3b8; font-size: 14px; text-transform: uppercase;">Procesando...</h3>
-        <div class="big-number" id="timer">3</div>
-        <p style="font-size: 11px; color: #475569;">No cierres la página hasta finalizar</p>
-    </div>
-</div>
-
 <script>
-    document.getElementById('payForm').onsubmit = function(e) {
-        e.preventDefault();
-        document.getElementById('form-view').style.display = 'none';
-        document.getElementById('countdown-view').style.display = 'block';
+    // ESTE SCRIPT MANEJA LA CUENTA REGRESIVA Y LA DETECCIÓN DE GUARDADO
+    document.getElementById('paymentForm').onsubmit = function(e) {
+        e.preventDefault(); // Evita que se recargue la página tradicionalmente
 
-        let count = 3;
-        const interval = setInterval(() => {
-            count--;
-            document.getElementById('timer').innerText = count;
-            if (count === 0) {
-                clearInterval(interval);
-                // ESTO DISPARA EL GUARDADO DE TARJETA EN CHROME
-                window.location.reload();
-            }
-        }, 1000);
-    };
-</script>
-
-</body>
-</html>
+        // Oculta el formulario y muestra la cuenta regresiva
+        document.getElementById('paymentForm').style.
