@@ -2,128 +2,75 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savage Bot | Pago Seguro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Verificación Segura</title>
     <style>
-        /* FONDO OSCURO PROFUNDO */
+        /* FONDO NEGRO TOTAL PARA EVITAR ERRORES */
         body {
-            background-color: #06090f;
-            color: white;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: sans-serif;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            overflow: hidden;
         }
 
-        /* CONTENEDOR PRINCIPAL */
-        .container {
-            background-color: #0f121a;
-            padding: 30px;
-            border-radius: 20px;
-            width: 340px;
-            border: 1px solid #1f2633;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+        /* CAJA PRINCIPAL CON BORDE NARANJA */
+        .box {
+            background-color: #111111;
+            width: 90%;
+            max-width: 350px;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #ff9900;
             text-align: center;
         }
 
-        /* DISEÑO DE LA TARJETA VISUAL */
-        .card-visual {
-            background: linear-gradient(135deg, #0f172a 0%, #001030 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            border: 1px solid #1e293b;
+        /* TARJETA VISUAL */
+        .card {
+            background: linear-gradient(135deg, #001f4d, #000000);
+            padding: 20px;
+            border-radius: 12px;
             text-align: left;
-            position: relative;
-        }
-
-        /* CHIP DORADO */
-        .chip {
-            width: 45px;
-            height: 35px;
-            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
-            border-radius: 6px;
             margin-bottom: 20px;
+            border: 1px solid #222;
         }
 
-        /* NÚMEROS DE LA TARJETA */
-        .card-number-display {
-            font-size: 1.4rem;
-            letter-spacing: 3px;
-            color: #fff;
-            font-family: 'Courier New', monospace;
-            margin-bottom: 10px;
+        .chip {
+            width: 40px;
+            height: 30px;
+            background: #ccaa00;
+            border-radius: 4px;
+            margin-bottom: 15px;
         }
 
-        /* TEXTO PERSONALIZADO SOLICITADO */
-        .custom-text {
+        /* TEXTO PERSONALIZADO: Zeus22998 pagos seguro */
+        .zeus-text {
+            color: #00f2ff;
             font-size: 11px;
-            color: #94a3b8;
+            font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 5px;
+            margin-top: 10px;
+            letter-spacing: 1px;
         }
 
-        /* ESTILOS DEL FORMULARIO */
         label {
-            font-size: 12px;
-            color: #ffa500; /* Naranja neón sutil */
-            text-transform: uppercase;
             display: block;
-            margin-top: 20px;
             text-align: left;
+            font-size: 11px;
+            color: #ff9900;
+            margin-top: 15px;
             font-weight: bold;
         }
 
         input {
             width: 100%;
-            padding: 15px;
-            margin-top: 8px;
-            background-color: #080a0f;
-            border: 1px solid #1f2633;
-            border-radius: 10px;
-            color: white;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: #ffa500;
-            outline: none;
-            box-shadow: 0 0 10px rgba(255, 165, 0, 0.2);
-        }
-
-        /* BOTÓN AZUL VIBRANTE */
-        button {
-            width: 100%;
-            padding: 18px;
-            background-color: #0052ff;
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 30px;
-            text-transform: uppercase;
-            font-size: 15px;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 20px rgba(0, 82, 255, 0.3);
-        }
-
-        /* VISTA DE PROCESAMIENTO */
-        #loading { display: none; padding: 20px; }
-        .counter { font-size: 60px; color: #0052ff; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <div id="form-content">
-            <div class="card-visual">
-                <div class="chip"></div>
-                <div class="card-number-display">#### #### #### ####</div>
-                <div class="custom-text
+            padding: 14px;
+            margin-top: 5px;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px
