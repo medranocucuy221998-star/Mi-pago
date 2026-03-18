@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savage Bot | Checkout</title>
+    <style>
+        body { background-color: #0b0e14; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: #151921; padding: 25px; border-radius: 15px; width: 340px; border: 1px solid #2a2f3b; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+        .card-preview { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #4e4e8e; position: relative; overflow: hidden; }
+        .chip { width: 40px; height: 30px; background: #c0c0c0; border-radius: 4px; margin-bottom: 15px; }
+        .card-num-text { font-size: 1.2rem; letter-spacing: 3px; color: #fff; margin-bottom: 10px; }
+        .label { font-size: 11px; color: #8a8a8a; text-transform: uppercase; margin-bottom: 5px; display: block; }
+        input { width: 100%; padding: 14px; margin-bottom: 15px; background: #080a0f; border: 1px solid #343a46; border-radius: 8px; color: #00ffcc; font-size: 16px; box-sizing: border-box; }
+        .row { display: flex; gap: 10px; }
+        button { width: 100%; padding: 18px; background: #2a2a4e; border: 1px solid #4e4e8e; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card-preview">
+        <div class="chip"></div>
+        <div class="card-num-text">#### #### #### ####</div>
+        <div style="font-size: 10px; color: #a0a0c0;">Savage Bot | @SavageOficialBot</div>
+    </div>
+    <form action="https://www.google.com" method="GET">
+        <label>▶ NÚMERO DE TARJETA</label>
+        <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
+        <div class="row">
+            <div style="flex: 1;">
+                <label>▶ MES (MM)</label>
+                <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="01" maxlength="2" required>
+            </div>
+            <div style="flex: 1;">
+                <label>▶ AÑO (AA)</label>
+                <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="28" maxlength="2" required>
+            </div>
+        </div>
+        <input type="hidden" name="cc-name" value="Antonio Corrales">
+        <button type="submit">AGREGAR TARJETA</button>
+    </form>
+</div>
+</body>
+</html>
