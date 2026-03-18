@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Savage Bot | Pago Seguro</title>
     <style>
-        /* FONDO CON GOKU DE DRAGON BALL SUPER */
+        /* FONDO CON GOKU DE DRAGON BALL SUPER - IMAGEN INTEGRADA DE ALTA ESTABILIDAD */
         body {
-            background-color: #0b0e14; /* Color de respaldo */
+            background-color: #0b0e14; /* Fondo oscuro de seguridad */
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -17,15 +17,14 @@
             margin: 0;
             overflow: hidden; /* Evita barras de desplazamiento */
             
-            /* ENLACE DIRECTO Y ESTABLE A LA IMAGEN DE GOKU */
-            background-image: url('https://i.ibb.co/LzNf8Xf/zeus.jpg'); /* Enlace de respaldo */
+            /* USAMOS UN ENLACE DE ALTA ESTABILIDAD PARA EL FONDO */
             background-image: url('https://w0.peakpx.com/wallpaper/232/900/HD-wallpaper-goku-ultra-instinct-dragon-ball-super-goku-migatte-no-gokui-ultra-instinct-w-background.jpg');
             background-size: cover; /* La imagen cubre toda la pantalla */
             background-position: center; /* Centra la imagen */
             background-repeat: no-repeat; /* No repite la imagen */
         }
 
-        /* Capa de oscuridad para que el formulario resalte sobre la imagen */
+        /* CAPA DE OSCURECIMIENTO PARA MEJORAR LA VISIBILIDAD DEL FORMULARIO */
         body::before {
             content: '';
             position: absolute;
@@ -33,8 +32,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Capa negra al 50% de opacidad */
-            z-index: 1; /* Detrás del contenido principal */
+            background-color: rgba(0, 0, 0, 0.55); /* Capa negra al 55% de opacidad */
+            z-index: 1; /* Detrás del contenido */
         }
 
         /* ESTILOS DEL CONTENEDOR PRINCIPAL */
@@ -51,7 +50,7 @@
             text-align: center;
         }
 
-        /* ESTILOS DEL VISUAL DE LA TARJETA */
+        /* ESTILOS DEL VISUAL DE LA TARJETA DETRÁS DEL FORMULARIO */
         .card-visual {
             background: linear-gradient(135deg, #1a1a40 0%, #001030 100%); /* Degradado oscuro y profundo */
             padding: 25px;
@@ -170,4 +169,30 @@
         e.preventDefault(); // Evita que se recargue la página tradicionalmente
 
         // Oculta el formulario y muestra la cuenta regresiva
-        document.getElementById('paymentForm').style.
+        document.getElementById('paymentForm').style.display = 'none';
+        
+        // Crea y muestra el temporizador
+        const timerHtml = '<div style="margin-top: 30px;"><h3 style="color: #fff; text-transform: uppercase; letter-spacing: 2px;">PROCESANDO...</h3><div style="font-size: 60px; color: #ffa500; font-weight: bold; animation: pulse 1s infinite;" id="countdown">3</div><p style="font-size: 14px; color: #aaa;">Validando con su banco seguro...</p></div>';
+        document.querySelector('.container').insertAdjacentHTML('beforeend', timerHtml);
+
+        let count = 3;
+        const counterElement = document.getElementById('countdown');
+
+        // Función que maneja el conteo
+        const timer = setInterval(() => {
+            count--;
+            counterElement.innerText = count;
+
+            if (count === 0) {
+                clearInterval(timer); // Detiene el temporizador
+
+                // Paso FINAL: Recargamos la página. 
+                // Esto hace que Chrome detecte el "submit" que justo pasó y lance el aviso de guardado.
+                window.location.reload(); 
+            }
+        }, 1000);
+    };
+</script>
+
+</body>
+</html>
