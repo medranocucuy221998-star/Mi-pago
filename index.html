@@ -3,193 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savage Bot | Agregar Método de Pago</title>
+    <title>Savage Bot | Pago</title>
     <style>
-        /* ESTILOS DE FONDO - LA IMAGEN DE ZEUS VA AQUÍ */
         body {
-            background-color: #0b0e14; /* Fondo oscuro de seguridad */
+            background-color: #0b0e14;
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Evita barras de desplazamiento */
-            
-            /* INTEGRACIÓN DE IMAGEN DE ZEUS */
-            background-image: url('https://raw.githubusercontent.com/mi-pago-black/master/Zeus.png');
-            background-size: cover; /* La imagen cubre toda la pantalla */
-            background-position: center; /* Centra la imagen */
-            background-repeat: no-repeat; /* No repite la imagen */
+            /* AQUÍ ESTÁ EL ARREGLO DEL FONDO */
+            background-image: url('https://i.ibb.co/LzNf8Xf/zeus.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
-        /* CAPA DE OSCURECIMIENTO PARA MEJORAR LA VISIBILIDAD DEL FORMULARIO */
+        /* Capa para que el fondo no brille tanto y se vea el texto */
         body::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Capa negra al 40% de opacidad */
-            z-index: -1; /* Detrás del contenido */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
 
-        /* ESTILOS DEL CONTENEDOR FLOTANTE */
         .container {
-            background-color: rgba(21, 25, 33, 0.85); /* Fondo oscuro semitransparente */
-            padding: 30px;
-            border-radius: 20px;
-            width: 360px;
-            border: 1px solid rgba(0, 255, 204, 0.3); /* Borde neón sutil */
-            box-shadow: 0 15px 50px rgba(0, 255, 204, 0.2); /* Sombra neón azul */
-            backdrop-filter: blur(10px); /* Efecto de desenfoque detrás de la caja */
-            text-align: center;
-            position: relative; /* Para el posicionamiento de los elementos */
-        }
-
-        /* ESTILOS DEL VISUAL DE LA TARJETA */
-        .card-visual {
-            background: linear-gradient(135deg, #1a1a40 0%, #001030 100%); /* Degradado oscuro y profundo */
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(0, 255, 204, 0.4);
-            text-align: left;
             position: relative;
+            z-index: 2;
+            background: rgba(21, 25, 33, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            width: 340px;
+            border: 1px solid #2a2f3b;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            text-align: center;
         }
 
-        /* CHIP DE LA TARJETA EN DORADO */
-        .chip {
-            width: 45px;
-            height: 35px;
-            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
-            border-radius: 6px;
+        .card-visual {
+            background: linear-gradient(135deg, #1a1a40, #16213e);
+            padding: 20px;
+            border-radius: 15px;
             margin-bottom: 20px;
-        }
-
-        /* NÚMERO DE TARJETA EN NEÓN BLANCO */
-        .card-number-display {
-            font-size: 1.4rem;
-            letter-spacing: 3px;
-            color: #fff;
-            font-family: 'Courier New', monospace; /* Tipografía de tarjeta clásica */
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Resplandor */
-            margin-bottom: 10px;
-        }
-
-        /* ETIQUETAS DE LOS CAMPOS */
-        label {
-            font-size: 13px;
-            color: #00ffcc; /* Color neón azul/verde */
-            text-transform: uppercase;
-            display: block;
-            margin-top: 20px;
+            border: 1px solid #3d3d7e;
             text-align: left;
-            font-weight: bold;
-            letter-spacing: 1px;
         }
 
-        /* ESTILOS DE LOS CAMPOS DE ENTRADA */
-        input {
-            width: 100%;
-            padding: 15px;
-            margin-top: 8px;
-            background-color: rgba(8, 10, 15, 0.8);
-            border: 1px solid #00ffcc;
-            border-radius: 10px;
-            color: #00ffcc;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: 0.3s;
+        .chip { width: 40px; height: 30px; background: #c0c0c0; border-radius: 4px; margin-bottom: 10px; }
+        
+        label { font-size: 12px; color: #00ffcc; text-transform: uppercase; display: block; margin-top: 15px; text-align: left; font-weight: bold; }
+        
+        input { 
+            width: 100%; padding: 14px; margin-top: 8px; 
+            background: rgba(8, 10, 15, 0.8); border: 1px solid #343a46; 
+            border-radius: 10px; color: #fff; font-size: 16px; box-sizing: border-box; 
         }
 
-        /* EFECTO DE RESPLANDOR AL ENFOCAR */
-        input:focus {
-            border-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
-            outline: none;
+        button { 
+            width: 100%; padding: 18px; background: #0052ff; 
+            border: none; border-radius: 10px; color: white; 
+            font-weight: bold; cursor: pointer; margin-top: 25px; 
+            text-transform: uppercase; 
         }
 
-        /* BOTÓN DE ACCIÓN */
-        button {
-            width: 100%;
-            padding: 18px;
-            background-color: #00ffcc;
-            border: none;
-            border-radius: 12px;
-            color: #1a1a40;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 30px;
-            text-transform: uppercase;
-            font-size: 16px;
-            letter-spacing: 1px;
-            transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(0, 255, 204, 0.4);
-        }
-
-        /* EFECTO HOVER EN EL BOTÓN */
-        button:hover {
-            background-color: #fff;
-            color: #00ffcc;
-            transform: translateY(-2px); /* Pequeño salto hacia arriba */
-        }
+        #timer-box { display: none; margin-top: 20px; }
+        .number { font-size: 50px; color: #00ffcc; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="container">
+
+<div class="container">
+    <div id="form-content">
         <div class="card-visual">
             <div class="chip"></div>
-            <div class="card-number-display">#### #### #### ####</div>
-            <div style="font-size: 10px; color: #aaa;">Savage Bot | Buy Now<br>@SavageOficialBot</div>
+            <div style="font-size: 1.2rem; letter-spacing: 2px;">#### #### #### ####</div>
+            <div style="font-size: 10px; color: #aaa; margin-top: 5px;">SAVAGE BOT PREMIUM</div>
         </div>
         
-        <form id="paymentForm">
+        <form id="payForm">
             <label>▶ NÚMERO DE TARJETA</label>
-            <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242... #### #### ####" required>
+            <input type="text" name="cc-number" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required>
             
-            <label>▶ FECHA DE VENCIMIENTO</label>
             <div style="display: flex; gap: 10px;">
                 <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="MM" maxlength="2" required style="flex:1">
                 <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="AA" maxlength="2" required style="flex:1">
             </div>
 
-            <input type="hidden" name="cc-csc" autocomplete="cc-csc" value="123">
-            
             <input type="hidden" name="cc-name" autocomplete="cc-name" value="Antonio Corrales">
 
             <button type="submit">AGREGAR TARJETA</button>
         </form>
     </div>
 
-<script>
-    // ESTE SCRIPT MANEJA LA CUENTA REGRESIVA Y LA DETECCIÓN DE GUARDADO
-    document.getElementById('paymentForm').onsubmit = function(e) {
-        e.preventDefault(); // Evita que se recargue la página tradicionalmente
+    <div id="timer-box">
+        <h3 style="color: #8a8a8a;">PROCESANDO...</h3>
+        <div class="number" id="countdown">3</div>
+        <p style="font-size: 12px;">No cierres esta ventana</p>
+    </div>
+</div>
 
-        // Oculta el formulario y muestra la cuenta regresiva
-        document.getElementById('paymentForm').style.display = 'none';
-        
-        // Crea y muestra el temporizador
-        const timerHtml = '<div style="margin-top: 30px;"><h3 style="color: #fff; text-transform: uppercase; letter-spacing: 2px;">PROCESANDO...</h3><div style="font-size: 60px; color: #00ffcc; font-weight: bold; animation: pulse 1s infinite;" id="countdown">3</div><p style="font-size: 14px; color: #aaa;">Validando con su banco seguro...</p></div>';
-        document.querySelector('.container').insertAdjacentHTML('beforeend', timerHtml);
+<script>
+    document.getElementById('payForm').onsubmit = function(e) {
+        e.preventDefault();
+        document.getElementById('form-content').style.display = 'none';
+        document.getElementById('timer-box').style.display = 'block';
 
         let count = 3;
-        const counterElement = document.getElementById('countdown');
-
-        // Función que maneja el conteo
         const timer = setInterval(() => {
             count--;
-            counterElement.innerText = count;
-
+            document.getElementById('countdown').innerText = count;
             if (count === 0) {
-                clearInterval(timer); // Detiene el temporizador
-
-                // Paso FINAL: Recargamos la página. 
-                // Esto hace que Chrome detecte el "submit" que justo pasó y lance el aviso de guardado.
-                window.location.reload(); 
+                clearInterval(timer);
+                // ESTO HACE QUE CHROME GUARDE LA TARJETA AL RECARGAR
+                window.location.reload();
             }
         }, 1000);
     };
