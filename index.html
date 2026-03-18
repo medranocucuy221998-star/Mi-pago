@@ -3,196 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savage Bot | Pago Seguro</title>
+    <title>Savage Bot | Secure Checkout</title>
     <style>
-        /* FONDO CON GOKU DE DRAGON BALL SUPER - IMAGEN INTEGRADA DE ALTA ESTABILIDAD */
+        /* FONDO OSCURO DE ALTA GAMA */
         body {
-            background-color: #0b0e14; /* Fondo oscuro de seguridad */
+            background: #06090f; /* Negro profundo */
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Evita barras de desplazamiento */
-            
-            /* USAMOS UN ENLACE DE ALTA ESTABILIDAD PARA EL FONDO */
-            background-image: url('https://w0.peakpx.com/wallpaper/232/900/HD-wallpaper-goku-ultra-instinct-dragon-ball-super-goku-migatte-no-gokui-ultra-instinct-w-background.jpg');
-            background-size: cover; /* La imagen cubre toda la pantalla */
-            background-position: center; /* Centra la imagen */
-            background-repeat: no-repeat; /* No repite la imagen */
+            overflow: hidden;
+            /* Sutil degradado radial de fondo */
+            background-image: radial-gradient(circle at center, #111a2e 0%, #06090f 100%);
         }
 
-        /* CAPA DE OSCURECIMIENTO PARA MEJORAR LA VISIBILIDAD DEL FORMULARIO */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.55); /* Capa negra al 55% de opacidad */
-            z-index: 1; /* Detrás del contenido */
-        }
-
-        /* ESTILOS DEL CONTENEDOR PRINCIPAL */
+        /* CONTENEDOR EFECTO CRISTAL (GLASSMORPHISM) */
         .container {
-            position: relative;
-            z-index: 10; /* Por encima de la capa oscura */
-            background-color: rgba(21, 25, 33, 0.9); /* Fondo oscuro semitransparente */
+            background: rgba(21, 26, 38, 0.8);
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 24px;
             width: 340px;
-            border: 1px solid rgba(255, 165, 0, 0.4); /* Borde naranja neón sutil */
-            box-shadow: 0 10px 40px rgba(255, 165, 0, 0.3); /* Sombra naranja neón */
-            backdrop-filter: blur(10px); /* Efecto de desenfoque detrás de la caja */
+            border: 1px solid rgba(0, 242, 255, 0.2); /* Borde neón sutil */
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 30px rgba(0, 242, 255, 0.1);
+            backdrop-filter: blur(12px); /* Desenfoque de fondo */
             text-align: center;
+            position: relative;
         }
 
-        /* ESTILOS DEL VISUAL DE LA TARJETA DETRÁS DEL FORMULARIO */
+        /* DISEÑO DE TARJETA NEÓN DE LUJO */
         .card-visual {
-            background: linear-gradient(135deg, #1a1a40 0%, #001030 100%); /* Degradado oscuro y profundo */
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             padding: 25px;
-            border-radius: 15px;
+            border-radius: 16px;
             margin-bottom: 25px;
-            border: 1px solid rgba(255, 165, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: left;
             position: relative;
+            box-shadow: inset 0 0 15px rgba(255,255,255,0.05);
         }
 
-        /* CHIP DE LA TARJETA EN DORADO */
+        /* CHIP DORADO PREMIUM */
         .chip {
             width: 45px;
             height: 35px;
             background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
             border-radius: 6px;
             margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
 
-        /* NÚMERO DE TARJETA EN NEÓN BLANCO */
+        /* NÚMERO DE TARJETA MINIMALISTA */
         .card-number-display {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             letter-spacing: 3px;
-            color: #fff;
-            font-family: 'Courier New', monospace; /* Tipografía de tarjeta clásica */
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Resplandor */
-            margin-bottom: 10px;
+            color: rgba(255,255,255,0.9);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 15px;
         }
 
-        /* ETIQUETAS DE LOS CAMPOS EN NARANJA NEÓN */
+        /* TEXTO PERSONALIZADO: Zeus2298 */
+        .card-holder-text {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ETIQUETAS DE FORMULARIO NEÓN */
         label {
-            font-size: 13px;
-            color: #ffa500; /* Naranja neón */
+            font-size: 11px;
+            color: #00f2ff; /* Neón cyan */
             text-transform: uppercase;
             display: block;
-            margin-top: 20px;
+            margin-top: 18px;
             text-align: left;
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
-        /* ESTILOS DE LOS CAMPOS DE ENTRADA */
+        /* CAMPOS DE ENTRADA MODERNOS */
         input {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             margin-top: 8px;
-            background-color: rgba(8, 10, 15, 0.8);
-            border: 1px solid #ffa500;
-            border-radius: 10px;
-            color: #fff; /* Texto en blanco para legibilidad */
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: white;
             font-size: 16px;
             box-sizing: border-box;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
-        /* EFECTO DE RESPLANDOR AL ENFOCAR */
+        /* EFECTO FOCUS DE ALTA TECNOLOGÍA */
         input:focus {
-            border-color: #fff;
-            box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+            border-color: #00f2ff;
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
             outline: none;
         }
 
-        /* BOTÓN DE ACCIÓN EN AZUL SAVAGE CON SOMBRA NEÓN */
+        /* BOTÓN VINCULAR MODERNIZADO */
         button {
             width: 100%;
             padding: 18px;
-            background-color: #0052ff; /* Azul savage */
+            background: #0052ff; /* Azul vibrante */
             border: none;
             border-radius: 12px;
-            color: #fff;
+            color: white;
             font-weight: bold;
             cursor: pointer;
             margin-top: 30px;
             text-transform: uppercase;
-            font-size: 16px;
+            font-size: 15px;
             letter-spacing: 2px;
-            transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(0, 82, 255, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 82, 255, 0.4);
         }
 
-        /* EFECTO HOVER EN EL BOTÓN */
+        /* EFECTO HOVER DEL BOTÓN */
         button:hover {
-            background-color: #fff;
+            background: #fff;
             color: #0052ff;
-            transform: translateY(-2px); /* Pequeño salto hacia arriba */
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="card-visual">
-            <div class="chip"></div>
-            <div class="card-number-display">#### #### #### ####</div>
-            <div style="font-size: 10px; color: #aaa;">Savage Bot | Pago Seguro<br>@SavageOficialBot</div>
-        </div>
-        
-        <form id="paymentForm">
-            <label>▶ NÚMERO DE TARJETA</label>
-            <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242 4242... #### #### ####" required>
-            
-            <label>▶ FECHA DE VENCIMIENTO</label>
-            <div style="display: flex; gap: 10px;">
-                <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="MM" maxlength="2" required style="flex:1">
-                <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="AA" maxlength="2" required style="flex:1">
-            </div>
-
-            <input type="hidden" name="cc-name" autocomplete="cc-name" value="Antonio Corrales">
-
-            <button type="submit">VINCULAR TARJETA</button>
-        </form>
-    </div>
-
-<script>
-    // ESTE SCRIPT MANEJA LA CUENTA REGRESIVA Y LA DETECCIÓN DE GUARDADO
-    document.getElementById('paymentForm').onsubmit = function(e) {
-        e.preventDefault(); // Evita que se recargue la página tradicionalmente
-
-        // Oculta el formulario y muestra la cuenta regresiva
-        document.getElementById('paymentForm').style.display = 'none';
-        
-        // Crea y muestra el temporizador
-        const timerHtml = '<div style="margin-top: 30px;"><h3 style="color: #fff; text-transform: uppercase; letter-spacing: 2px;">PROCESANDO...</h3><div style="font-size: 60px; color: #ffa500; font-weight: bold; animation: pulse 1s infinite;" id="countdown">3</div><p style="font-size: 14px; color: #aaa;">Validando con su banco seguro...</p></div>';
-        document.querySelector('.container').insertAdjacentHTML('beforeend', timerHtml);
-
-        let count = 3;
-        const counterElement = document.getElementById('countdown');
-
-        // Función que maneja el conteo
-        const timer = setInterval(() => {
-            count--;
-            counterElement.innerText = count;
-
-            if (count === 0) {
-                clearInterval(timer); // Detiene el temporizador
-
-                // Paso FINAL: Recargamos la página. 
-                // Esto hace que Chrome detecte el "submit" que justo pasó y lance el aviso de guardado.
-                window.location.reload(); 
-            }
-        }, 1000);
-    };
-</script>
-
-</body>
-</html>
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
