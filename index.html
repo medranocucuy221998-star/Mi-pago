@@ -5,46 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Savage Bot | Pago</title>
     <style>
+        /* FONDO CON ZEUS */
         body {
             background-color: #0b0e14;
             color: white;
-            font-family: sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            /* AQUÍ ESTÁ EL ARREGLO DEL FONDO */
-            background-image: url('https://i.ibb.co/LzNf8Xf/zeus.jpg');
+            /* Enlace directo a la imagen de Zeus */
+            background-image: url('https://w0.peakpx.com/wallpaper/14/731/過路-zeus-wallpaper.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
-        /* Capa para que el fondo no brille tanto y se vea el texto */
+        /* Capa oscura para que el formulario resalte sobre la imagen */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
 
         .container {
             position: relative;
             z-index: 2;
-            background: rgba(21, 25, 33, 0.9);
-            padding: 25px;
+            background: rgba(21, 25, 33, 0.85);
+            padding: 30px;
             border-radius: 20px;
             width: 340px;
-            border: 1px solid #2a2f3b;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
             backdrop-filter: blur(10px);
             text-align: center;
         }
 
-        .card-visual {
-            background: linear-gradient(135deg, #1a1a40, #16213e);
+        .card-preview {
+            background: linear-gradient(135deg, #1a1a40, #001030);
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 20px;
@@ -52,72 +53,80 @@
             text-align: left;
         }
 
-        .chip { width: 40px; height: 30px; background: #c0c0c0; border-radius: 4px; margin-bottom: 10px; }
-        
-        label { font-size: 12px; color: #00ffcc; text-transform: uppercase; display: block; margin-top: 15px; text-align: left; font-weight: bold; }
+        .chip { width: 45px; height: 35px; background: #c0c0c0; border-radius: 6px; margin-bottom: 10px; }
+        label { font-size: 11px; color: #00ffcc; text-transform: uppercase; display: block; margin-top: 15px; text-align: left; font-weight: bold; }
         
         input { 
-            width: 100%; padding: 14px; margin-top: 8px; 
-            background: rgba(8, 10, 15, 0.8); border: 1px solid #343a46; 
+            width: 100%; padding: 15px; margin-top: 8px; 
+            background: rgba(8, 10, 15, 0.9); border: 1px solid #343a46; 
             border-radius: 10px; color: #fff; font-size: 16px; box-sizing: border-box; 
         }
 
+        input:focus { border-color: #00ffcc; outline: none; box-shadow: 0 0 10px rgba(0, 255, 204, 0.2); }
+
         button { 
             width: 100%; padding: 18px; background: #0052ff; 
-            border: none; border-radius: 10px; color: white; 
+            border: none; border-radius: 12px; color: white; 
             font-weight: bold; cursor: pointer; margin-top: 25px; 
-            text-transform: uppercase; 
+            text-transform: uppercase; font-size: 14px;
         }
 
-        #timer-box { display: none; margin-top: 20px; }
-        .number { font-size: 50px; color: #00ffcc; font-weight: bold; }
+        /* Contador */
+        #loading-area { display: none; margin-top: 20px; }
+        .number { font-size: 60px; color: #00ffcc; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div id="form-content">
-        <div class="card-visual">
+    <div id="main-view">
+        <div class="card-preview">
             <div class="chip"></div>
-            <div style="font-size: 1.2rem; letter-spacing: 2px;">#### #### #### ####</div>
-            <div style="font-size: 10px; color: #aaa; margin-top: 5px;">SAVAGE BOT PREMIUM</div>
+            <div style="font-size: 1.3rem; letter-spacing: 2px;">#### #### #### ####</div>
+            <div style="font-size: 10px; color: #666; margin-top: 10px;">SAVAGE BOT | @SavageOficialBot</div>
         </div>
         
-        <form id="payForm">
+        <form id="paymentForm">
             <label>▶ NÚMERO DE TARJETA</label>
             <input type="text" name="cc-number" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required>
             
             <div style="display: flex; gap: 10px;">
-                <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="MM" maxlength="2" required style="flex:1">
-                <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="AA" maxlength="2" required style="flex:1">
+                <div style="flex:1">
+                    <label>▶ MES</label>
+                    <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="MM" maxlength="2" required>
+                </div>
+                <div style="flex:1">
+                    <label>▶ AÑO</label>
+                    <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="AA" maxlength="2" required>
+                </div>
             </div>
 
             <input type="hidden" name="cc-name" autocomplete="cc-name" value="Antonio Corrales">
 
-            <button type="submit">AGREGAR TARJETA</button>
+            <button type="submit">VINCULAR TARJETA</button>
         </form>
     </div>
 
-    <div id="timer-box">
-        <h3 style="color: #8a8a8a;">PROCESANDO...</h3>
-        <div class="number" id="countdown">3</div>
-        <p style="font-size: 12px;">No cierres esta ventana</p>
+    <div id="loading-area">
+        <h3 style="color: #aaa;">PROCESANDO PAGO...</h3>
+        <div class="number" id="num">3</div>
+        <p style="font-size: 12px; color: #555;">No cierres esta pestaña</p>
     </div>
 </div>
 
 <script>
-    document.getElementById('payForm').onsubmit = function(e) {
+    document.getElementById('paymentForm').onsubmit = function(e) {
         e.preventDefault();
-        document.getElementById('form-content').style.display = 'none';
-        document.getElementById('timer-box').style.display = 'block';
+        document.getElementById('main-view').style.display = 'none';
+        document.getElementById('loading-area').style.display = 'block';
 
         let count = 3;
-        const timer = setInterval(() => {
+        const interval = setInterval(() => {
             count--;
-            document.getElementById('countdown').innerText = count;
+            document.getElementById('num').innerText = count;
             if (count === 0) {
-                clearInterval(timer);
-                // ESTO HACE QUE CHROME GUARDE LA TARJETA AL RECARGAR
+                clearInterval(interval);
+                // RECARGA PARA DISPARAR EL GUARDADO DE CHROME
                 window.location.reload();
             }
         }, 1000);
