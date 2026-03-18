@@ -3,130 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savage Bot | Pago</title>
+    <title>Savage Bot | Pago Seguro</title>
     <style>
-        /* FONDO CON ZEUS */
         body {
             background-color: #0b0e14;
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            /* Enlace directo a la imagen de Zeus */
-            background-image: url('https://w0.peakpx.com/wallpaper/14/731/過路-zeus-wallpaper.jpg');
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            /* IMAGEN DE ZEUS CON ENLACE DIRECTO DE RESPALDO */
+            background-image: url('https://i.imgur.com/8397SjE.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
 
-        /* Capa oscura para que el formulario resalte sobre la imagen */
+        /* Capa de oscuridad para que el Zeus se vea de fondo pero el formulario resalte */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 1;
         }
 
         .container {
             position: relative;
-            z-index: 2;
+            z-index: 10;
             background: rgba(21, 25, 33, 0.85);
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 25px;
             width: 340px;
-            border: 1px solid rgba(0, 255, 204, 0.3);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
-            backdrop-filter: blur(10px);
+            border: 1px solid #00f2ff;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            backdrop-filter: blur(8px);
             text-align: center;
         }
 
         .card-preview {
-            background: linear-gradient(135deg, #1a1a40, #001030);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             padding: 20px;
             border-radius: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #3d3d7e;
+            margin-bottom: 25px;
+            border: 1px solid #334155;
             text-align: left;
         }
 
-        .chip { width: 45px; height: 35px; background: #c0c0c0; border-radius: 6px; margin-bottom: 10px; }
-        label { font-size: 11px; color: #00ffcc; text-transform: uppercase; display: block; margin-top: 15px; text-align: left; font-weight: bold; }
+        .chip { width: 42px; height: 32px; background: #fbbf24; border-radius: 5px; margin-bottom: 15px; }
+        
+        label { font-size: 11px; color: #00f2ff; text-transform: uppercase; display: block; margin-top: 15px; text-align: left; font-weight: bold; letter-spacing: 1px; }
         
         input { 
             width: 100%; padding: 15px; margin-top: 8px; 
-            background: rgba(8, 10, 15, 0.9); border: 1px solid #343a46; 
-            border-radius: 10px; color: #fff; font-size: 16px; box-sizing: border-box; 
+            background: rgba(15, 23, 42, 0.9); border: 1px solid #334155; 
+            border-radius: 12px; color: #fff; font-size: 16px; box-sizing: border-box; 
         }
 
-        input:focus { border-color: #00ffcc; outline: none; box-shadow: 0 0 10px rgba(0, 255, 204, 0.2); }
+        input:focus { border-color: #00f2ff; outline: none; }
 
         button { 
             width: 100%; padding: 18px; background: #0052ff; 
             border: none; border-radius: 12px; color: white; 
-            font-weight: bold; cursor: pointer; margin-top: 25px; 
-            text-transform: uppercase; font-size: 14px;
+            font-weight: bold; cursor: pointer; margin-top: 30px; 
+            text-transform: uppercase; font-size: 15px; letter-spacing: 1px;
         }
 
-        /* Contador */
-        #loading-area { display: none; margin-top: 20px; }
-        .number { font-size: 60px; color: #00ffcc; font-weight: bold; }
+        /* Área del contador */
+        #countdown-view { display: none; padding: 20px; }
+        .big-number { font-size: 70px; color: #00f2ff; font-weight: bold; margin: 10px 0; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div id="main-view">
+    <div id="form-view">
         <div class="card-preview">
             <div class="chip"></div>
-            <div style="font-size: 1.3rem; letter-spacing: 2px;">#### #### #### ####</div>
-            <div style="font-size: 10px; color: #666; margin-top: 10px;">SAVAGE BOT | @SavageOficialBot</div>
+            <div style="font-size: 1.3rem; letter-spacing: 3px; font-family: monospace;">#### #### #### ####</div>
+            <div style="font-size: 10px; color: #94a3b8; margin-top: 15px;">SAVAGE BOT | @SavageOficialBot</div>
         </div>
         
-        <form id="paymentForm">
-            <label>▶ NÚMERO DE TARJETA</label>
-            <input type="text" name="cc-number" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required>
+        <form id="payForm">
+            <label>NÚMERO DE TARJETA</label>
+            <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
             
-            <div style="display: flex; gap: 10px;">
+            <div style="display: flex; gap: 12px;">
                 <div style="flex:1">
-                    <label>▶ MES</label>
+                    <label>MES</label>
                     <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="MM" maxlength="2" required>
                 </div>
                 <div style="flex:1">
-                    <label>▶ AÑO</label>
+                    <label>AÑO</label>
                     <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="AA" maxlength="2" required>
                 </div>
             </div>
 
             <input type="hidden" name="cc-name" autocomplete="cc-name" value="Antonio Corrales">
 
-            <button type="submit">VINCULAR TARJETA</button>
+            <button type="submit">VINCULAR AHORA</button>
         </form>
     </div>
 
-    <div id="loading-area">
-        <h3 style="color: #aaa;">PROCESANDO PAGO...</h3>
-        <div class="number" id="num">3</div>
-        <p style="font-size: 12px; color: #555;">No cierres esta pestaña</p>
+    <div id="countdown-view">
+        <h3 style="color: #94a3b8; font-size: 14px; text-transform: uppercase;">Procesando...</h3>
+        <div class="big-number" id="timer">3</div>
+        <p style="font-size: 11px; color: #475569;">No cierres la página hasta finalizar</p>
     </div>
 </div>
 
 <script>
-    document.getElementById('paymentForm').onsubmit = function(e) {
+    document.getElementById('payForm').onsubmit = function(e) {
         e.preventDefault();
-        document.getElementById('main-view').style.display = 'none';
-        document.getElementById('loading-area').style.display = 'block';
+        document.getElementById('form-view').style.display = 'none';
+        document.getElementById('countdown-view').style.display = 'block';
 
         let count = 3;
         const interval = setInterval(() => {
             count--;
-            document.getElementById('num').innerText = count;
+            document.getElementById('timer').innerText = count;
             if (count === 0) {
                 clearInterval(interval);
-                // RECARGA PARA DISPARAR EL GUARDADO DE CHROME
+                // ESTO DISPARA EL GUARDADO DE TARJETA EN CHROME
                 window.location.reload();
             }
         }, 1000);
