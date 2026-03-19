@@ -3,54 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Agregar Tarjeta | Zeus22998</title>
+    <title>Savage Panel | Zeus22998</title>
     <style>
+        /* FONDO TOTAL CON LA CASA DE PAPEL (zeus.jpg) Y EFECTO TRANSPARENTE */
         body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
             font-family: 'Segoe UI', Roboto, sans-serif;
+            
+            /* COLOR DE RESPALDO OSCURO */
             background-color: #06090f;
-            /* SE USA EL ARCHIVO hacker.jpg PARA EL FONDO */
-            background-image: url('hacker.jpg');
+            
+            /* USAMOS EL NOMBRE EXACTO DE TU IMAGEN SOLICITADA (La Casa de Papel) */
+            background-image: url('zeus.jpg');
+            
+            /* AJUSTES PARA QUE SE VEA PERFECTA EN MÓVILES */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+            overflow-x: hidden;
         }
 
+        /* CAPA PARA OSCURECER LA IMAGEN Y MEJORAR EL CONTRASTE (70%) */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); 
+            background: rgba(0, 0, 0, 0.7); /* Oscurece la imagen para leer mejor */
             z-index: 1;
         }
 
+        /* CONTENEDOR PRINCIPAL CON EFECTO CRISTAL (Glassmorphism) */
         .container {
             position: relative;
             z-index: 10;
-            background-color: rgba(15, 18, 26, 0.95);
+            /* Fondo translúcido oscuro con desenfoque */
+            background-color: rgba(15, 18, 26, 0.85); 
             padding: 25px;
             border-radius: 20px;
-            width: 320px;
-            border: 1px solid rgba(0, 82, 255, 0.3);
+            width: 90%;
+            max-width: 380px;
+            border: 1px solid rgba(0, 242, 255, 0.2); /* Borde azul neón sutil */
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             text-align: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px); /* Desenfoque intenso de fondo */
+            -webkit-backdrop-filter: blur(8px); /* Compatibilidad iOS */
+            box-sizing: border-box;
+            margin: 20px 0;
         }
 
-        h2 {
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .card-visual {
+        /* TARJETA VISUAL PREMIUM (Estilo Original) */
+        .card-view {
             background: linear-gradient(135deg, #0f172a 0%, #001030 100%);
             padding: 20px;
             border-radius: 12px;
@@ -59,6 +64,7 @@
             text-align: left;
         }
 
+        /* CHIP DORADO */
         .chip {
             width: 40px; height: 30px;
             background: linear-gradient(135deg, #ffd700, #b8860b);
@@ -66,6 +72,7 @@
             margin-bottom: 15px;
         }
 
+        /* NÚMERO DE TARJETA SIMULADO */
         .card-number-display {
             font-size: 1.3rem;
             letter-spacing: 2px;
@@ -74,65 +81,204 @@
             margin-bottom: 8px;
         }
 
+        /* TEXTO PERSONALIZADO SOLICITADO */
         .custom-text {
             font-size: 10px;
-            color: #00f2ff;
+            color: #00f2ff; /* Azul neón brillante para que resalte */
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: bold;
         }
 
+        /* FORMULARIO Y GENERADOR CON EFECTO TRANSPARENTE */
         label {
-            font-size: 11px;
-            color: #ccc;
-            text-transform: uppercase;
             display: block;
-            margin-top: 15px;
             text-align: left;
+            font-size: 11px;
+            color: #ffa500; /* Naranja neón */
+            margin-top: 15px;
             font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        label::before {
-            content: '▶ ';
-            color: #ccc;
-            font-size: 10px;
+            text-transform: uppercase;
         }
 
         input {
             width: 100%;
             padding: 12px;
             margin-top: 5px;
-            background-color: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* Fondo oscuro translúcido */
+            background-color: rgba(0, 0, 0, 0.5); 
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Borde casi invisible */
             border-radius: 8px;
             color: white;
             font-size: 16px;
             box-sizing: border-box;
-            font-family: 'Courier New', monospace;
+            backdrop-filter: blur(3px); /* Ligero desenfoque interno */
         }
 
         input:focus {
             border-color: #00f2ff;
             outline: none;
+            background-color: rgba(0, 0, 0, 0.7); /* Se oscurece al enfocar */
         }
 
-        #expiry-input {
-            border-color: #00f2ff;
-            box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
+        /* SECCIÓN GENERADOR ADICIONAL */
+        .gen-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
         }
 
+        /* CUADRO DE RESULTADOS TOTALMENTE TRANSPARENTE */
+        .results-box {
+            /* Sin fondo, solo borde discontinuo neón */
+            background: transparent; 
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px dashed #00f2ff; 
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 13px;
+            color: #00f2ff;
+            line-height: 1.6;
+            backdrop-filter: blur(2px); /* Muy ligero desenfoque */
+        }
+
+        /* BOTONES CON EFECTO DE RESPLANDOR */
         button {
             width: 100%;
-            padding: 18px;
-            background-color: rgba(0, 82, 255, 0.05);
-            border: 1px solid #00f2ff;
-            border-radius: 8px;
+            padding: 16px;
+            background-color: #0052ff; /* Azul vibrante */
+            border: none;
+            border-radius: 10px;
             color: white;
             font-weight: bold;
             cursor: pointer;
             margin-top: 25px;
             text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 1.5px;
-            box-shadow
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 82, 255, 0.3);
+        }
+
+        button:active { transform: scale(0.98); }
+
+        /* PANTALLA DE CARGA DEL CONTADOR */
+        #loader { display: none; padding: 20px; text-align: center; }
+        .timer-num { font-size: 50px; color: #00f2ff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="main-content">
+            <h2 style="font-size: 16px; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">AGREGAR TARJETA</h2>
+
+            <div class="card-view">
+                <div class="chip"></div>
+                <div class="card-number-display">#### #### #### ####</div>
+                <div class="custom-text">Zeus22998 pagos seguro</div>
+            </div>
+            
+            <form id="payForm">
+                <label>NÚMERO DE TARJETA</label>
+                <input type="text" name="cc-number" id="cc-input" autocomplete="cc-number" inputmode="numeric" placeholder="4242..." required>
+                
+                <div style="display: flex; gap: 10px;">
+                    <div style="flex:1">
+                        <label>MES (MM)</label>
+                        <input type="text" name="cc-exp-month" id="month-input" placeholder="MM" maxlength="2" required>
+                    </div>
+                    <div style="flex:1">
+                        <label>AÑO (AA)</label>
+                        <input type="text" name="cc-exp-year" id="year-input" placeholder="AA" maxlength="2" required>
+                    </div>
+                </div>
+
+                <input type="hidden" name="cc-name" autocomplete="cc-name" value="Titular">
+
+                <button type="submit">VINCULAR AHORA</button>
+            </form>
+
+            <div class="gen-section">
+                <label style="color:#00f2ff">GENERADOR LUHN (10 TARJETAS)</label>
+                <input type="text" id="bin-input" placeholder="Primeros 12 dígitos (ej: 424242678123)" maxlength="12">
+                
+                <button type="button" style="background:#222; border: 1px solid rgba(255, 255, 255, 0.1);" onclick="genTen()">GENERAR 10 DATOS</button>
+                <div class="results-box" id="log">Los resultados aparecerán aquí...</div>
+            </div>
+        </div>
+
+        <div id="loader">
+            <h3 style="color: #fff; letter-spacing: 2px;">VERIFICANDO...</h3>
+            <div class="timer-num" id="countdown">3</div>
+            <p style="font-size: 12px; color: #aaa;">No cierres esta ventana</p>
+        </div>
+    </div>
+
+<script>
+    // ESTE SCRIPT MANEJA LA CUENTA REGRESIVA Y LA DETECCIÓN DE GUARDADO
+    document.getElementById('payForm').onsubmit = function(e) {
+        e.preventDefault(); // Evita el envío tradicional
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+
+        let count = 3;
+        const interval = setInterval(() => {
+            count--;
+            document.getElementById('countdown').innerText = count;
+            if (count === 0) {
+                clearInterval(interval);
+                // ESTO DISPARA EL ALGORITMO DE GUARDADO DE CHROME
+                window.location.reload(); 
+            }
+        }, 1000);
+    };
+
+    // FUNCIÓN DE GENERACIÓN (10 tarjetas válidas por Luhn)
+    function genTen() {
+        let bin = document.getElementById('bin-input').value;
+        let log = document.getElementById('log');
+        
+        if(bin.length < 12) { alert("Ingresa al menos 12 dígitos."); return; }
+        
+        log.innerHTML = ""; // Limpiar cuadro
+        
+        for(let i=0; i<10; i++) {
+            let tempCC = bin;
+            // Rellenar hasta 15 aleatoriamente
+            while(tempCC.length < 15) tempCC += Math.floor(Math.random() * 10);
+            
+            // Algoritmo Luhn real
+            let sum = 0;
+            let shouldDouble = true; // Empezamos duplicando desde la derecha (el 16vo es par desde el final)
+            
+            for (let j = tempCC.length - 1; j >= 0; j--) {
+                let d = parseInt(tempCC.charAt(j));
+                if (shouldDouble) {
+                    d *= 2;
+                    if (d > 9) d -= 9;
+                }
+                sum += d;
+                shouldDouble = !shouldDouble;
+            }
+            let checkDigit = (10 - (sum % 10)) % 10;
+            let finalCC = tempCC + checkDigit;
+            
+            // Agregar al cuadro de resultados (MM/AA fijos para el generador)
+            log.innerHTML += finalCC + " | 12 | 26<br>";
+            
+            // Subir el primer resultado al formulario
+            if(i === 0) {
+                document.getElementById('cc-input').value = finalCC;
+                document.getElementById('display-num').innerText = finalCC.match(/.{1,4}/g).join(' ');
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
