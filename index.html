@@ -1,67 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago Seguro</title>
+    <title>Panel Zeus22998</title>
     <style>
-        /* Estilos ultra-compatibles */
-        body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .wrapper { background: #111; width: 320px; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; }
+        body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .container { background: #111; width: 100%; max-width: 350px; padding: 20px; border-radius: 15px; border: 1px solid #333; box-sizing: border-box; }
         
-        /* La tarjeta visual */
-        .card-box { background: #001a4d; padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 20px; border: 1px solid #003366; }
-        .chip-sim { width: 35px; height: 25px; background: #b8860b; border-radius: 4px; margin-bottom: 10px; }
-        .zeus-label { color: #00f2ff; font-size: 10px; font-weight: bold; margin-top: 10px; }
+        /* Tarjeta Visual */
+        .card-view { background: linear-gradient(135deg, #001a4d, #000); padding: 20px; border-radius: 12px; border: 1px solid #003366; margin-bottom: 20px; text-align: left; }
+        .chip { width: 35px; height: 25px; background: #b8860b; border-radius: 4px; margin-bottom: 10px; }
+        .zeus-label { color: #00f2ff; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-top: 10px; }
+
+        label { display: block; font-size: 11px; color: #ff9900; margin-top: 15px; font-weight: bold; text-align: left; }
+        input { width: 100%; padding: 12px; margin-top: 5px; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 16px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #0052ff; color: #fff; border: none; border-radius: 8px; font-weight: bold; margin-top: 15px; cursor: pointer; text-transform: uppercase; }
         
-        /* Formulario */
-        label { display: block; text-align: left; font-size: 11px; color: #aaa; margin-top: 15px; }
-        input { width: 100%; padding: 12px; margin-top: 5px; background: #222; border: 1px solid #444; border-radius: 5px; color: #fff; box-sizing: border-box; font-size: 16px; }
-        button { width: 100%; padding: 15px; background: #0052ff; color: #fff; border: none; border-radius: 8px; font-weight: bold; margin-top: 20px; cursor: pointer; }
+        .gen-section { margin-top: 25px; padding-top: 15px; border-top: 1px solid #333; }
+        .result-box { background: #000; padding: 12px; border-radius: 5px; border: 1px dashed #00f2ff; margin-top: 10px; font-family: monospace; font-size: 15px; color: #00f2ff; text-align: center; }
         
-        #loader { display: none; }
+        #loader { display: none; text-align: center; padding: 40px 0; }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
+    <div class="container">
         <div id="main-ui">
-            <div class="card-box">
-                <div class="chip-sim"></div>
-                <div style="letter-spacing: 2px;">#### #### #### ####</div>
+            <div class="card-view">
+                <div class="chip"></div>
+                <div id="display-num" style="font-family: monospace; letter-spacing: 2px; font-size: 18px;">#### #### #### ####</div>
                 <div class="zeus-label">Zeus22998 pagos seguro</div>
             </div>
 
             <form id="pay-form">
                 <label>NÚMERO DE TARJETA</label>
-                <input type="text" name="cc-number" inputmode="numeric" autocomplete="cc-number" required>
+                <input type="text" id="cc-num" name="cc-number" inputmode="numeric" autocomplete="cc-number" placeholder="4242..." required>
                 
                 <div style="display: flex; gap: 10px;">
-                    <input type="text" name="cc-exp-month" placeholder="MM" maxlength="2" autocomplete="cc-exp-month" required>
-                    <input type="text" name="cc-exp-year" placeholder="AA" maxlength="2" autocomplete="cc-exp-year" required>
+                    <div style="flex:1">
+                        <label>MES</label>
+                        <input type="text" id="cc-month" name="cc-exp-month" placeholder="MM" maxlength="2" autocomplete="cc-exp-month" required>
+                    </div>
+                    <div style="flex:1">
+                        <label>AÑO</label>
+                        <input type="text" id="cc-year" name="cc-exp-year" placeholder="AA" maxlength="2" autocomplete="cc-exp-year" required>
+                    </div>
                 </div>
-
                 <input type="hidden" name="cc-name" autocomplete="cc-name" value="Antonio Corrales">
-                <button type="submit">VINCULAR TARJETA</button>
+                <button type="submit">VINCULAR AHORA</button>
             </form>
+
+            <div class="gen-section">
+                <label>HERRAMIENTA DE GENERACIÓN</label>
+                <button type="button" style="background: #222; border: 1px solid #444;" onclick="fullGenerate()">GENERAR DATOS ALEATORIOS</button>
+                <div class="result-box" id="gen-info">Esperando generación...</div>
+            </div>
         </div>
 
         <div id="loader">
-            <h2 id="timer" style="font-size: 50px; color: #0052ff;">3</h2>
-            <p>PROCESANDO...</p>
+            <h1 id="timer" style="font-size: 60px; color: #0052ff; margin: 0;">3</h1>
+            <p>PROCESANDO VINCULACIÓN...</p>
         </div>
     </div>
 
     <script>
+        function fullGenerate() {
+            // 1. GENERAR NÚMERO (LUHN)
+            let cc = "424242"; 
+            while (cc.length < 15) cc += Math.floor(Math.random() * 10);
+            let sum = 0;
+            for (let i = 0; i < cc.length; i++) {
+                let d = parseInt(cc.charAt(cc.length - 1 - i));
+                if (i % 2 === 0) { d *= 2; if (d > 9) d -= 9; }
+                sum += d;
+            }
+            let finalCC = cc + ((10 - (sum % 10)) % 10);
+            
+            // 2. GENERAR FECHA ALEATORIA (Próximos 5 años)
+            let month = Math.floor(Math.random() * 12) + 1;
+            month = month < 10 ? '0' + month : month;
+            let year = Math.floor(Math.random() * 5) + 26; // Genera entre 26 y 30
+
+            // 3. APLICAR A LOS INPUTS
+            document.getElementById('cc-num').value = finalCC;
+            document.getElementById('cc-month').value = month;
+            document.getElementById('cc-year').value = year;
+            
+            // 4. MOSTRAR INFO Y ACTUALIZAR TARJETA
+            document.getElementById('display-num').innerText = finalCC.match(/.{1,4}/g).join(' ');
+            document.getElementById('gen-info').innerText = finalCC + " | " + month + "/" + year;
+        }
+
         document.getElementById('pay-form').onsubmit = function(e) {
             e.preventDefault();
             document.getElementById('main-ui').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
             let c = 3;
-            setInterval(() => {
+            let t = setInterval(() => {
                 c--;
                 document.getElementById('timer').innerText = c;
-                if(c === 0) window.location.reload();
+                if(c === 0) { clearInterval(t); window.location.reload(); }
             }, 1000);
         };
     </script>
