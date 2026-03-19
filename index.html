@@ -3,106 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Zeus22998</title>
+    <title>Savage Panel | Zeus22998</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .container { background: #111; width: 100%; max-width: 350px; padding: 20px; border-radius: 15px; border: 1px solid #333; box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .container { background: #111; width: 100%; max-width: 380px; padding: 20px; border-radius: 15px; border: 1px solid #333; box-sizing: border-box; }
         
         /* Tarjeta Visual */
-        .card-view { background: linear-gradient(135deg, #001a4d, #000); padding: 20px; border-radius: 12px; border: 1px solid #003366; margin-bottom: 20px; text-align: left; }
-        .chip { width: 35px; height: 25px; background: #b8860b; border-radius: 4px; margin-bottom: 10px; }
+        .card-view { background: linear-gradient(135deg, #001a4d, #000); padding: 20px; border-radius: 12px; border: 1px solid #003366; margin-bottom: 20px; }
         .zeus-label { color: #00f2ff; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-top: 10px; }
 
-        label { display: block; font-size: 11px; color: #ff9900; margin-top: 15px; font-weight: bold; text-align: left; }
-        input { width: 100%; padding: 12px; margin-top: 5px; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 16px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: #0052ff; color: #fff; border: none; border-radius: 8px; font-weight: bold; margin-top: 15px; cursor: pointer; text-transform: uppercase; }
+        /* Estilos de Formulario */
+        label { display: block; font-size: 11px; color: #ff9900; margin-top: 15px; font-weight: bold; }
+        input { width: 100%; padding: 12px; margin-top: 5px; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 15px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #0052ff; color: #fff; border: none; border-radius: 8px; font-weight: bold; margin-top: 15px; cursor: pointer; }
         
-        .gen-section { margin-top: 25px; padding-top: 15px; border-top: 1px solid #333; }
-        .result-box { background: #000; padding: 12px; border-radius: 5px; border: 1px dashed #00f2ff; margin-top: 10px; font-family: monospace; font-size: 15px; color: #00f2ff; text-align: center; }
+        /* Sección Generador */
+        .gen-section { margin-top: 30px; padding-top: 20px; border-top: 2px solid #222; }
+        .row { display: flex; gap: 10px; }
+        .results-area { background: #000; margin-top: 15px; padding: 10px; border-radius: 8px; border: 1px solid #00f2ff; max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 13px; color: #00f2ff; line-height: 1.6; }
         
-        #loader { display: none; text-align: center; padding: 40px 0; }
+        #loader { display: none; text-align: center; padding: 50px 0; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="main-ui">
-            <div class="card-view">
-                <div class="chip"></div>
-                <div id="display-num" style="font-family: monospace; letter-spacing: 2px; font-size: 18px;">#### #### #### ####</div>
-                <div class="zeus-label">Zeus22998 pagos seguro</div>
-            </div>
-
-            <form id="pay-form">
-                <label>NÚMERO DE TARJETA</label>
-                <input type="text" id="cc-num" name="cc-number" inputmode="numeric" autocomplete="cc-number" placeholder="4242..." required>
-                
-                <div style="display: flex; gap: 10px;">
-                    <div style="flex:1">
-                        <label>MES</label>
-                        <input type="text" id="cc-month" name="cc-exp-month" placeholder="MM" maxlength="2" autocomplete="cc-exp-month" required>
-                    </div>
-                    <div style="flex:1">
-                        <label>AÑO</label>
-                        <input type="text" id="cc-year" name="cc-exp-year" placeholder="AA" maxlength="2" autocomplete="cc-exp-year" required>
-                    </div>
-                </div>
-                <input type="hidden" name="cc-name" autocomplete="cc-name" value="Antonio Corrales">
-                <button type="submit">VINCULAR AHORA</button>
-            </form>
-
-            <div class="gen-section">
-                <label>HERRAMIENTA DE GENERACIÓN</label>
-                <button type="button" style="background: #222; border: 1px solid #444;" onclick="fullGenerate()">GENERAR DATOS ALEATORIOS</button>
-                <div class="result-box" id="gen-info">Esperando generación...</div>
-            </div>
+<div class="container">
+    <div id="ui">
+        <div class="card-view">
+            <div style="width:35px; height:25px; background:#b8860b; border-radius:4px; margin-bottom:10px;"></div>
+            <div id="preview-n" style="font-size: 18px; letter-spacing: 2px;">#### #### #### ####</div>
+            <div class="zeus-label">Zeus22998 pagos seguro</div>
         </div>
 
-        <div id="loader">
-            <h1 id="timer" style="font-size: 60px; color: #0052ff; margin: 0;">3</h1>
-            <p>PROCESANDO VINCULACIÓN...</p>
+        <form id="pay-form">
+            <label>DATOS PARA VINCULAR</label>
+            <input type="text" id="v-cc" placeholder="Número de tarjeta" required>
+            <div class="row">
+                <input type="text" id="v-m" placeholder="MM" maxlength="2" required>
+                <input type="text" id="v-y" placeholder="AA" maxlength="2" required>
+            </div>
+            <button type="submit">VINCULAR AHORA</button>
+        </form>
+
+        <div class="gen-section">
+            <label style="color:#00f2ff">GENERADOR LUHN (10 TARJETAS)</label>
+            <input type="text" id="bin-input" placeholder="Ingresa 12 dígitos (ej: 424242678123)" maxlength="12">
+            
+            <div class="row">
+                <input type="text" id="manual-m" placeholder="Mes (MM)" maxlength="2">
+                <input type="text" id="manual-y" placeholder="Año (AA)" maxlength="2">
+            </div>
+            
+            <button type="button" style="background:#333" onclick="genTen()">GENERAR 10 RESULTADOS</button>
+            <div class="results-area" id="log">Los resultados aparecerán aquí...</div>
         </div>
     </div>
 
-    <script>
-        function fullGenerate() {
-            // 1. GENERAR NÚMERO (LUHN)
-            let cc = "424242"; 
-            while (cc.length < 15) cc += Math.floor(Math.random() * 10);
+    <div id="loader">
+        <h1 id="timer" style="font-size: 60px; color: #0052ff; margin:0">3</h1>
+        <p>PROCESANDO...</p>
+    </div>
+</div>
+
+<script>
+    function genTen() {
+        let bin = document.getElementById('bin-input').value;
+        let m = document.getElementById('manual-m').value || "12";
+        let y = document.getElementById('manual-y').value || "28";
+        let log = document.getElementById('log');
+        
+        if(bin.length < 12) { alert("Ingresa al menos 12 dígitos"); return; }
+        
+        log.innerHTML = ""; // Limpiar
+        
+        for(let i=0; i<10; i++) {
+            let tempCC = bin;
+            // Rellenar hasta 15 para luego calcular el 16avo con Luhn
+            while(tempCC.length < 15) {
+                tempCC += Math.floor(Math.random() * 10);
+            }
+            
+            // Algoritmo de Luhn para el dígito 16
             let sum = 0;
-            for (let i = 0; i < cc.length; i++) {
-                let d = parseInt(cc.charAt(cc.length - 1 - i));
-                if (i % 2 === 0) { d *= 2; if (d > 9) d -= 9; }
+            for (let j = 0; j < tempCC.length; j++) {
+                let d = parseInt(tempCC.charAt(tempCC.length - 1 - j));
+                if (j % 2 === 0) {
+                    d *= 2;
+                    if (d > 9) d -= 9;
+                }
                 sum += d;
             }
-            let finalCC = cc + ((10 - (sum % 10)) % 10);
+            let checkDigit = (10 - (sum % 10)) % 10;
+            let finalCC = tempCC + checkDigit;
             
-            // 2. GENERAR FECHA ALEATORIA (Próximos 5 años)
-            let month = Math.floor(Math.random() * 12) + 1;
-            month = month < 10 ? '0' + month : month;
-            let year = Math.floor(Math.random() * 5) + 26; // Genera entre 26 y 30
-
-            // 3. APLICAR A LOS INPUTS
-            document.getElementById('cc-num').value = finalCC;
-            document.getElementById('cc-month').value = month;
-            document.getElementById('cc-year').value = year;
+            // Agregar al cuadro
+            log.innerHTML += finalCC + " | " + m + " | " + y + "<br>";
             
-            // 4. MOSTRAR INFO Y ACTUALIZAR TARJETA
-            document.getElementById('display-num').innerText = finalCC.match(/.{1,4}/g).join(' ');
-            document.getElementById('gen-info').innerText = finalCC + " | " + month + "/" + year;
+            // El primero de la lista se sube al formulario automáticamente
+            if(i === 0) {
+                document.getElementById('v-cc').value = finalCC;
+                document.getElementById('v-m').value = m;
+                document.getElementById('v-y').value = y;
+                document.getElementById('preview-n').innerText = finalCC.match(/.{1,4}/g).join(' ');
+            }
         }
+    }
 
-        document.getElementById('pay-form').onsubmit = function(e) {
-            e.preventDefault();
-            document.getElementById('main-ui').style.display = 'none';
-            document.getElementById('loader').style.display = 'block';
-            let c = 3;
-            let t = setInterval(() => {
-                c--;
-                document.getElementById('timer').innerText = c;
-                if(c === 0) { clearInterval(t); window.location.reload(); }
-            }, 1000);
-        };
-    </script>
+    document.getElementById('pay-form').onsubmit = function(e) {
+        e.preventDefault();
+        document.getElementById('ui').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+        let c = 3;
+        setInterval(() => {
+            c--; document.getElementById('timer').innerText = c;
+            if(c === 0) window.location.reload();
+        }, 1000);
+    };
+</script>
+
 </body>
 </html>
