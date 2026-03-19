@@ -3,60 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Agregar Tarjeta | Zeus22998</title>
+    <title>Savage Panel | Zeus22998</title>
     <style>
-        /* FONDO CON LA IMAGEN DE HACKER.JPG */
+        /* FONDO TOTAL CON zeus.jpg Y EFECTO TRANSPARENTE */
         body {
             margin: 0; padding: 0;
             display: flex; justify-content: center; align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             font-family: 'Segoe UI', Roboto, sans-serif;
             
             /* COLOR DE RESPALDO OSCURO */
             background-color: #06090f;
             
-            /* USAMOS EL NOMBRE EXACTO DE TU IMAGEN SUBIDA */
-            background-image: url('hacker.jpg');
+            /* USAMOS EL NOMBRE EXACTO DE TU IMAGEN SOLICITADA */
+            background-image: url('zeus.jpg');
             
-            /* AJUSTES PARA QUE SE VEA BIEN EN MÓVILES */
+            /* AJUSTES PARA QUE SE VEA PERFECTA EN MÓVILES */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
         }
 
-        /* CAPA PARA OSCURECER LA IMAGEN Y MEJORAR EL CONTRASTE */
+        /* CAPA PARA OSCURECER LA IMAGEN Y MEJORAR EL CONTRASTE (65%) */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); /* Filtro oscuro al 65% */
+            background: rgba(0, 0, 0, 0.65); 
             z-index: 1;
         }
 
-        /* CONTENEDOR PRINCIPAL DEL FORMULARIO */
+        /* CONTENEDOR PRINCIPAL CON EFECTO CRISTAL (Glassmorphism) */
         .container {
             position: relative;
             z-index: 10;
-            background-color: rgba(15, 18, 26, 0.95); /* Fondo oscuro semitransparente */
+            /* Fondo translúcido oscuro con desenfoque */
+            background-color: rgba(15, 18, 26, 0.8); 
             padding: 25px;
             border-radius: 20px;
-            width: 320px;
-            border: 1px solid rgba(0, 82, 255, 0.3); /* Borde azul sutil */
+            width: 90%;
+            max-width: 380px;
+            border: 1px solid rgba(0, 242, 255, 0.2); /* Borde azul neón sutil */
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             text-align: center;
-            backdrop-filter: blur(5px); /* Desenfoque de fondo */
+            backdrop-filter: blur(8px); /* Desenfoque intenso de fondo */
+            -webkit-backdrop-filter: blur(8px); /* Compatibilidad iOS */
+            box-sizing: border-box;
+            margin: 20px 0;
         }
 
-        h2 {
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        /* TARJETA VISUAL PREMIUM */
-        .card-visual {
+        /* TARJETA VISUAL PREMIUM (Estilo Original) */
+        .card-view {
             background: linear-gradient(135deg, #0f172a 0%, #001030 100%);
             padding: 20px;
             border-radius: 12px;
@@ -82,7 +80,7 @@
             margin-bottom: 8px;
         }
 
-        /* TEXTO PERSONALIZADO: Zeus22998 pagos seguro */
+        /* TEXTO PERSONALIZADO SOLICITADO */
         .custom-text {
             font-size: 10px;
             color: #00f2ff; /* Azul neón brillante para que resalte */
@@ -91,39 +89,67 @@
             font-weight: bold;
         }
 
-        /* ETIQUETAS Y CAMPOS DE ENTRADA */
+        /* FORMULARIO Y GENERADOR CON EFECTO TRANSPARENTE */
         label {
-            font-size: 10px;
-            color: #aaa;
-            text-transform: uppercase;
             display: block;
-            margin-top: 15px;
             text-align: left;
+            font-size: 11px;
+            color: #ffa500; /* Naranja neón */
+            margin-top: 15px;
             font-weight: bold;
+            text-transform: uppercase;
         }
 
         input {
             width: 100%;
             padding: 12px;
             margin-top: 5px;
-            background-color: #080a0f;
-            border: 1px solid #333;
+            /* Fondo oscuro translúcido */
+            background-color: rgba(0, 0, 0, 0.5); 
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Borde casi invisible */
             border-radius: 8px;
             color: white;
             font-size: 16px;
             box-sizing: border-box;
+            backdrop-filter: blur(3px); /* Ligero desenfoque interno */
         }
 
         input:focus {
-            border-color: #0052ff;
+            border-color: #00f2ff;
             outline: none;
+            background-color: rgba(0, 0, 0, 0.7); /* Se oscurece al enfocar */
         }
 
-        /* BOTÓN AGREGAR TARJETA CON EFECTO DE RESPLANDOR */
+        /* SECCIÓN GENERADOR ADICIONAL */
+        .gen-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        /* CUADRO DE RESULTADOS TOTALMENTE TRANSPARENTE */
+        .results-box {
+            /* Sin fondo, solo borde discontinuo neón */
+            background: transparent; 
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px dashed #00f2ff; 
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 13px;
+            color: #00f2ff;
+            line-height: 1.6;
+            backdrop-filter: blur(2px); /* Muy ligero desenfoque */
+        }
+
+        /* BOTONES CON EFECTO DE RESPLANDOR */
         button {
             width: 100%;
             padding: 16px;
-            background-color: #0052ff;
+            background-color: #0052ff; /* Azul vibrante */
             border: none;
             border-radius: 10px;
             color: white;
@@ -134,75 +160,4 @@
             font-size: 14px;
             letter-spacing: 1px;
             transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(0, 82, 255, 0.3);
-        }
-
-        button:active { transform: scale(0.98); }
-
-        /* PANTALLA DE CARGA DEL CONTADOR */
-        #loader { display: none; padding: 20px; }
-        .timer-num { font-size: 50px; color: #0052ff; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <div id="main-content">
-            <h2>AGREGAR TARJETA</h2>
-
-            <div class="card-visual">
-                <div class="chip"></div>
-                <div class="card-number-display">#### #### #### ####</div>
-                <div class="custom-text">Zeus22998 pagos seguro</div>
-            </div>
-            
-            <form id="payForm">
-                <label>NÚMERO DE TARJETA</label>
-                <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
-                
-                <div style="display: flex; gap: 10px;">
-                    <div style="flex:1">
-                        <label>MES (MM)</label>
-                        <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="12" maxlength="2" required>
-                    </div>
-                    <div style="flex:1">
-                        <label>AÑO (AA)</label>
-                        <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="28" maxlength="2" required>
-                    </div>
-                </div>
-
-                <input type="hidden" name="cc-name" autocomplete="cc-name" value="Titular">
-
-                <button type="submit">AGREGAR TARJETA</button>
-            </form>
-        </div>
-
-        <div id="loader">
-            <h3 style="color: #fff; letter-spacing: 2px;">VERIFICANDO...</h3>
-            <div class="timer-num" id="countdown">3</div>
-            <p style="font-size: 12px; color: #aaa;">No cierres esta ventana por seguridad</p>
-        </div>
-    </div>
-
-<script>
-    // ESTE SCRIPT MANEJA LA CUENTA REGRESIVA Y LA DETECCIÓN DE GUARDADO
-    document.getElementById('payForm').onsubmit = function(e) {
-        e.preventDefault(); // Evita el envío tradicional
-        document.getElementById('main-content').style.display = 'none';
-        document.getElementById('loader').style.display = 'block';
-
-        let count = 3;
-        const interval = setInterval(() => {
-            count--;
-            document.getElementById('countdown').innerText = count;
-            if (count === 0) {
-                clearInterval(interval);
-                // ESTO DISPARA EL ALGORITMO DE GUARDADO DE CHROME
-                window.location.reload(); 
-            }
-        }, 1000);
-    };
-</script>
-
-</body>
-</html>
+            box-shadow: 0 5px 20px rgba(0, 82, 255
