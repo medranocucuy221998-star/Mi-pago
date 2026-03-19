@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savage Panel | Zeus22998</title>
+    <title>Savage Panel | Zeus2298</title>
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         .container { background: #111; width: 100%; max-width: 380px; padding: 20px; border-radius: 15px; border: 1px solid #333; box-sizing: border-box; }
@@ -37,7 +37,7 @@
 
         <form id="pay-form">
             <label>DATOS PARA VINCULAR</label>
-            <input type="text" id="v-cc" placeholder="Número de tarjeta" required>
+            <input type="text" id="v-cc" placeholder="Número de tarjeta generado" required>
             <div class="row">
                 <input type="text" id="v-m" placeholder="MM" maxlength="2" required>
                 <input type="text" id="v-y" placeholder="AA" maxlength="2" required>
@@ -46,16 +46,16 @@
         </form>
 
         <div class="gen-section">
-            <label style="color:#00f2ff">GENERADOR LUHN (10 TARJETAS)</label>
-            <input type="text" id="bin-input" placeholder="Ingresa 12 dígitos (ej: 424242678123)" maxlength="12">
+            <label style="color:#00f2ff">GENERADOR LUHN (BIN + XXXX)</label>
+            <input type="text" id="bin-input" placeholder="Primeros 12 dígitos (ej: 424242678123)" maxlength="12" oninput="updateDisplay()">
             
             <div class="row">
                 <input type="text" id="manual-m" placeholder="Mes (MM)" maxlength="2">
                 <input type="text" id="manual-y" placeholder="Año (AA)" maxlength="2">
             </div>
             
-            <button type="button" style="background:#333" onclick="genTen()">GENERAR 10 RESULTADOS</button>
-            <div class="results-area" id="log">Los resultados aparecerán aquí...</div>
+            <button type="button" style="background:#333" onclick="genTen()">GENERAR 10 CON MÉTODO LUHN</button>
+            <div class="results-area" id="log">Introduce 12 dígitos...</div>
         </div>
     </div>
 
@@ -66,40 +66,59 @@
 </div>
 
 <script>
+    // Actualiza la visualización de xxxx mientras escribes
+    function updateDisplay() {
+        let bin = document.getElementById('bin-input').value;
+        let log = document.getElementById('log');
+        if(bin.length > 0) {
+            log.innerText = bin + "xxxx";
+        } else {
+            log.innerText = "Introduce 12 dígitos...";
+        }
+    }
+
     function genTen() {
         let bin = document.getElementById('bin-input').value;
         let m = document.getElementById('manual-m').value || "12";
         let y = document.getElementById('manual-y').value || "28";
         let log = document.getElementById('log');
         
-        if(bin.length < 12) { alert("Ingresa al menos 12 dígitos"); return; }
+        if(bin.length < 12) { 
+            alert("Por favor, ingresa los 12 dígitos completos."); 
+            return; 
+        }
         
-        log.innerHTML = ""; // Limpiar
+        log.innerHTML = ""; // Limpiar lista
         
         for(let i=0; i<10; i++) {
             let tempCC = bin;
-            // Rellenar hasta 15 para luego calcular el 16avo con Luhn
+            
+            // Generamos los 3 números aleatorios (posiciones 13, 14, 15)
             while(tempCC.length < 15) {
                 tempCC += Math.floor(Math.random() * 10);
             }
             
-            // Algoritmo de Luhn para el dígito 16
+            // Aplicamos Algoritmo de Luhn para el dígito de control (posición 16)
             let sum = 0;
-            for (let j = 0; j < tempCC.length; j++) {
-                let d = parseInt(tempCC.charAt(tempCC.length - 1 - j));
-                if (j % 2 === 0) {
+            let shouldDouble = true; // Empezamos duplicando desde la derecha (el 16vo es par desde el final)
+            
+            for (let j = tempCC.length - 1; j >= 0; j--) {
+                let d = parseInt(tempCC.charAt(j));
+                if (shouldDouble) {
                     d *= 2;
                     if (d > 9) d -= 9;
                 }
                 sum += d;
+                shouldDouble = !shouldDouble;
             }
+            
             let checkDigit = (10 - (sum % 10)) % 10;
             let finalCC = tempCC + checkDigit;
             
-            // Agregar al cuadro
+            // Imprimir resultado en el cuadro
             log.innerHTML += finalCC + " | " + m + " | " + y + "<br>";
             
-            // El primero de la lista se sube al formulario automáticamente
+            // Subir el primer resultado generado al formulario principal
             if(i === 0) {
                 document.getElementById('v-cc').value = finalCC;
                 document.getElementById('v-m').value = m;
@@ -115,7 +134,8 @@
         document.getElementById('loader').style.display = 'block';
         let c = 3;
         setInterval(() => {
-            c--; document.getElementById('timer').innerText = c;
+            c--; 
+            document.getElementById('timer').innerText = c;
             if(c === 0) window.location.reload();
         }, 1000);
     };
