@@ -5,46 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Agregar Tarjeta | Zeus22998</title>
     <style>
-        /* FONDO CON LA IMAGEN DE HACKER.JPG */
+        /* --- CONSERVAMOS TU FONDO DE GOKU --- */
         body {
-            margin: 0; padding: 0;
-            display: flex; justify-content: center; align-items: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
             font-family: 'Segoe UI', Roboto, sans-serif;
-            
-            /* COLOR DE RESPALDO OSCURO */
             background-color: #06090f;
-            
-            /* USAMOS EL NOMBRE EXACTO DE TU IMAGEN SUBIDA */
-            background-image: url('hacker.jpg');
-            
-            /* AJUSTES PARA QUE SE VEA BIEN EN MÓVILES */
+            /* SE RECOMIENDA USAR LA IMAGEN goku.jpg PARA UN FONDO IDÉNTICO */
+            background-image: url('goku.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
 
-        /* CAPA PARA OSCURECER LA IMAGEN Y MEJORAR EL CONTRASTE */
+        /* CAPA OSCURA SOBRE LA IMAGEN */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); /* Filtro oscuro al 65% */
+            background: rgba(0, 0, 0, 0.65); 
             z-index: 1;
         }
 
-        /* CONTENEDOR PRINCIPAL DEL FORMULARIO */
+        /* --- CONSERVAMOS TU CONTENEDOR PRINCIPAL --- */
         .container {
             position: relative;
             z-index: 10;
-            background-color: rgba(15, 18, 26, 0.95); /* Fondo oscuro semitransparente */
+            background-color: rgba(15, 18, 26, 0.95);
             padding: 25px;
             border-radius: 20px;
             width: 320px;
-            border: 1px solid rgba(0, 82, 255, 0.3); /* Borde azul sutil */
+            border: 1px solid rgba(0, 82, 255, 0.3);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             text-align: center;
-            backdrop-filter: blur(5px); /* Desenfoque de fondo */
+            backdrop-filter: blur(5px);
         }
 
         h2 {
@@ -55,7 +53,7 @@
             color: #fff;
         }
 
-        /* TARJETA VISUAL PREMIUM */
+        /* --- CONSERVAMOS TU TARJETA VISUAL PREMIUM (Zeus22998) --- */
         .card-visual {
             background: linear-gradient(135deg, #0f172a 0%, #001030 100%);
             padding: 20px;
@@ -65,7 +63,6 @@
             text-align: left;
         }
 
-        /* CHIP DORADO */
         .chip {
             width: 40px; height: 30px;
             background: linear-gradient(135deg, #ffd700, #b8860b);
@@ -73,7 +70,6 @@
             margin-bottom: 15px;
         }
 
-        /* NÚMERO DE TARJETA SIMULADO */
         .card-number-display {
             font-size: 1.3rem;
             letter-spacing: 2px;
@@ -82,66 +78,84 @@
             margin-bottom: 8px;
         }
 
-        /* TEXTO PERSONALIZADO: Zeus22998 pagos seguro */
         .custom-text {
             font-size: 10px;
-            color: #00f2ff; /* Azul neón brillante para que resalte */
+            color: #00f2ff; /* Azul neón para combinar con Goku */
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: bold;
         }
 
-        /* ETIQUETAS Y CAMPOS DE ENTRADA */
+        /* --- ACTUALIZAMOS LAS ETIQUETAS (▶ NÚMERO DE TARJETA) --- */
         label {
-            font-size: 10px;
-            color: #aaa;
+            font-size: 11px;
+            color: #ccc; /* Gris claro de Savage */
             text-transform: uppercase;
             display: block;
             margin-top: 15px;
             text-align: left;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
+        label::before {
+            content: '▶ ';
+            color: #ccc;
+            font-size: 10px;
+        }
+
+        /* --- ACTUALIZAMOS LOS CAMPOS DE ENTRADA (ESTILO SAVAGE NEÓN) --- */
         input {
             width: 100%;
             padding: 12px;
             margin-top: 5px;
-            background-color: #080a0f;
-            border: 1px solid #333;
+            background-color: transparent; /* Fondo transparente de Savage */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil de Savage */
             border-radius: 8px;
             color: white;
             font-size: 16px;
             box-sizing: border-box;
+            font-family: 'Courier New', monospace; /* Tipografía Courier de Savage */
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.3); /* Placeholder tenue */
         }
 
         input:focus {
-            border-color: #0052ff;
+            border-color: #00f2ff; /* Borde neón al enfocar */
             outline: none;
         }
 
-        /* BOTÓN AGREGAR TARJETA CON EFECTO DE RESPLANDOR */
+        /* --- ACTUALIZAMOS FECHA VENCIMIENTO EN AZUL NEÓN IDÉNTICO --- */
+        #expiry-input {
+            border-color: #00f2ff; /* Borde neón permanente */
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
+        }
+
+        /* --- ACTUALIZAMOS BOTÓN AGREGAR TARJETA (ESTILO RECTÁNGULO NEÓN) --- */
         button {
             width: 100%;
-            padding: 16px;
-            background-color: #0052ff;
-            border: none;
-            border-radius: 10px;
+            padding: 18px;
+            background-color: rgba(0, 82, 255, 0.05); /* Muy poco color de fondo */
+            border: 1px solid #00f2ff; /* Borde neón de Savage */
+            border-radius: 8px;
             color: white;
             font-weight: bold;
             cursor: pointer;
             margin-top: 25px;
             text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 1px;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
             transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(0, 82, 255, 0.3);
         }
 
         button:active { transform: scale(0.98); }
 
-        /* PANTALLA DE CARGA DEL CONTADOR */
+        /* PANTALLA DE CARGA (MANTENIDA) */
         #loader { display: none; padding: 20px; }
-        .timer-num { font-size: 50px; color: #0052ff; font-weight: bold; }
+        .timer-num { font-size: 50px; color: #00f2ff; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -158,18 +172,10 @@
             
             <form id="payForm">
                 <label>NÚMERO DE TARJETA</label>
-                <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
+                <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="0000 0000 0000 0000" required>
                 
-                <div style="display: flex; gap: 10px;">
-                    <div style="flex:1">
-                        <label>MES (MM)</label>
-                        <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="12" maxlength="2" required>
-                    </div>
-                    <div style="flex:1">
-                        <label>AÑO (AA)</label>
-                        <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="28" maxlength="2" required>
-                    </div>
-                </div>
+                <label>FECHA DE VENCIMIENTO</label>
+                <input type="text" name="cc-exp" id="expiry-input" autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" required>
 
                 <input type="hidden" name="cc-name" autocomplete="cc-name" value="Titular">
 
@@ -178,9 +184,8 @@
         </div>
 
         <div id="loader">
-            <h3 style="color: #fff; letter-spacing: 2px;">VERIFICANDO...</h3>
+            <h3 style="color: #fff;">VERIFICANDO...</h3>
             <div class="timer-num" id="countdown">3</div>
-            <p style="font-size: 12px; color: #aaa;">No cierres esta ventana por seguridad</p>
         </div>
     </div>
 
@@ -202,6 +207,15 @@
             }
         }, 1000);
     };
+
+    // Formateo automático de MM/AA (Opcional, pero recomendado para MM/AA)
+    document.getElementById('expiry-input').addEventListener('input', function(e) {
+        let input = e.target.value.replace(/\D/g, ''); // Elimina todo lo que no sea número
+        if (input.length >= 2) {
+            input = input.substring(0, 2) + '/' + input.substring(2, 4);
+        }
+        e.target.value = input;
+    });
 </script>
 
 </body>
