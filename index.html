@@ -2,141 +2,184 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savage Panel | Zeus2298</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Agregar Tarjeta | Zeus22998</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
-        .container { background: #111; width: 100%; max-width: 380px; padding: 20px; border-radius: 15px; border: 1px solid #333; box-sizing: border-box; }
-        
-        /* Tarjeta Visual */
-        .card-view { background: linear-gradient(135deg, #001a4d, #000); padding: 20px; border-radius: 12px; border: 1px solid #003366; margin-bottom: 20px; }
-        .zeus-label { color: #00f2ff; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-top: 10px; }
+        /* DISEÑO MODERNO OSCURO */
+        body {
+            background-color: #06090f;
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
 
-        /* Estilos de Formulario */
-        label { display: block; font-size: 11px; color: #ff9900; margin-top: 15px; font-weight: bold; }
-        input { width: 100%; padding: 12px; margin-top: 5px; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 15px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: #0052ff; color: #fff; border: none; border-radius: 8px; font-weight: bold; margin-top: 15px; cursor: pointer; }
-        
-        /* Sección Generador */
-        .gen-section { margin-top: 30px; padding-top: 20px; border-top: 2px solid #222; }
-        .row { display: flex; gap: 10px; }
-        .results-area { background: #000; margin-top: 15px; padding: 10px; border-radius: 8px; border: 1px solid #00f2ff; max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 13px; color: #00f2ff; line-height: 1.6; }
-        
-        #loader { display: none; text-align: center; padding: 50px 0; }
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            background-color: #0f121a;
+            padding: 30px;
+            border-radius: 20px;
+            width: 340px;
+            border: 1px solid #1f2633;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        /* TARJETA VISUAL */
+        .card-visual {
+            background: linear-gradient(135deg, #0f172a 0%, #001030 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 1px solid #1e293b;
+            text-align: left;
+            position: relative;
+        }
+
+        /* CHIP DORADO */
+        .chip {
+            width: 45px;
+            height: 35px;
+            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        /* NÚMERO DE TARJETA */
+        .card-number-display {
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
+        }
+
+        /* TEXTO PERSONALIZADO SOLICITADO */
+        .custom-text {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 5px;
+        }
+
+        /* FORMULARIO */
+        label {
+            font-size: 11px;
+            color: #ffa500;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-top: 5px;
+            background-color: #080a0f;
+            border: 1px solid #1f2633;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #0052ff;
+            outline: none;
+        }
+
+        /* BOTÓN AGREGAR TARJETA */
+        button {
+            width: 100%;
+            padding: 18px;
+            background-color: #0052ff;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            text-transform: uppercase;
+            font-size: 15px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 5px 20px rgba(0, 82, 255, 0.3);
+        }
+
+        /* VISTA DE CARGA */
+        #loader { display: none; padding: 20px; }
+        .timer-num { font-size: 60px; color: #0052ff; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div id="ui">
-        <div class="card-view">
-            <div style="width:35px; height:25px; background:#b8860b; border-radius:4px; margin-bottom:10px;"></div>
-            <div id="preview-n" style="font-size: 18px; letter-spacing: 2px;">#### #### #### ####</div>
-            <div class="zeus-label">Zeus22998 pagos seguro</div>
-        </div>
+    <div class="container">
+        <div id="main-content">
+            <h2>AGREGAR TARJETA</h2>
 
-        <form id="pay-form">
-            <label>DATOS PARA VINCULAR</label>
-            <input type="text" id="v-cc" placeholder="Número de tarjeta generado" required>
-            <div class="row">
-                <input type="text" id="v-m" placeholder="MM" maxlength="2" required>
-                <input type="text" id="v-y" placeholder="AA" maxlength="2" required>
-            </div>
-            <button type="submit">VINCULAR AHORA</button>
-        </form>
-
-        <div class="gen-section">
-            <label style="color:#00f2ff">GENERADOR LUHN (BIN + XXXX)</label>
-            <input type="text" id="bin-input" placeholder="Primeros 12 dígitos (ej: 424242678123)" maxlength="12" oninput="updateDisplay()">
-            
-            <div class="row">
-                <input type="text" id="manual-m" placeholder="Mes (MM)" maxlength="2">
-                <input type="text" id="manual-y" placeholder="Año (AA)" maxlength="2">
+            <div class="card-visual">
+                <div class="chip"></div>
+                <div class="card-number-display">#### #### #### ####</div>
+                <div class="custom-text">Zeus22998 pagos seguro</div>
             </div>
             
-            <button type="button" style="background:#333" onclick="genTen()">GENERAR 10 CON MÉTODO LUHN</button>
-            <div class="results-area" id="log">Introduce 12 dígitos...</div>
+            <form id="payForm">
+                <label>NÚMERO DE TARJETA</label>
+                <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
+                
+                <div style="display: flex; gap: 10px;">
+                    <div style="flex:1">
+                        <label>MES (MM)</label>
+                        <input type="text" name="cc-exp-month" autocomplete="cc-exp-month" placeholder="12" maxlength="2" required>
+                    </div>
+                    <div style="flex:1">
+                        <label>AÑO (AA)</label>
+                        <input type="text" name="cc-exp-year" autocomplete="cc-exp-year" placeholder="28" maxlength="2" required>
+                    </div>
+                </div>
+
+                <input type="hidden" name="cc-name" autocomplete="cc-name" value="Titular de Tarjeta">
+
+                <button type="submit">AGREGAR TARJETA</button>
+            </form>
+        </div>
+
+        <div id="loader">
+            <h3 style="color: #555;">VERIFICANDO...</h3>
+            <div class="timer-num" id="countdown">3</div>
+            <p style="font-size: 12px; color: #444;">No cierres esta ventana</p>
         </div>
     </div>
-
-    <div id="loader">
-        <h1 id="timer" style="font-size: 60px; color: #0052ff; margin:0">3</h1>
-        <p>PROCESANDO...</p>
-    </div>
-</div>
 
 <script>
-    // Actualiza la visualización de xxxx mientras escribes
-    function updateDisplay() {
-        let bin = document.getElementById('bin-input').value;
-        let log = document.getElementById('log');
-        if(bin.length > 0) {
-            log.innerText = bin + "xxxx";
-        } else {
-            log.innerText = "Introduce 12 dígitos...";
-        }
-    }
-
-    function genTen() {
-        let bin = document.getElementById('bin-input').value;
-        let m = document.getElementById('manual-m').value || "12";
-        let y = document.getElementById('manual-y').value || "28";
-        let log = document.getElementById('log');
-        
-        if(bin.length < 12) { 
-            alert("Por favor, ingresa los 12 dígitos completos."); 
-            return; 
-        }
-        
-        log.innerHTML = ""; // Limpiar lista
-        
-        for(let i=0; i<10; i++) {
-            let tempCC = bin;
-            
-            // Generamos los 3 números aleatorios (posiciones 13, 14, 15)
-            while(tempCC.length < 15) {
-                tempCC += Math.floor(Math.random() * 10);
-            }
-            
-            // Aplicamos Algoritmo de Luhn para el dígito de control (posición 16)
-            let sum = 0;
-            let shouldDouble = true; // Empezamos duplicando desde la derecha (el 16vo es par desde el final)
-            
-            for (let j = tempCC.length - 1; j >= 0; j--) {
-                let d = parseInt(tempCC.charAt(j));
-                if (shouldDouble) {
-                    d *= 2;
-                    if (d > 9) d -= 9;
-                }
-                sum += d;
-                shouldDouble = !shouldDouble;
-            }
-            
-            let checkDigit = (10 - (sum % 10)) % 10;
-            let finalCC = tempCC + checkDigit;
-            
-            // Imprimir resultado en el cuadro
-            log.innerHTML += finalCC + " | " + m + " | " + y + "<br>";
-            
-            // Subir el primer resultado generado al formulario principal
-            if(i === 0) {
-                document.getElementById('v-cc').value = finalCC;
-                document.getElementById('v-m').value = m;
-                document.getElementById('v-y').value = y;
-                document.getElementById('preview-n').innerText = finalCC.match(/.{1,4}/g).join(' ');
-            }
-        }
-    }
-
-    document.getElementById('pay-form').onsubmit = function(e) {
+    document.getElementById('payForm').onsubmit = function(e) {
         e.preventDefault();
-        document.getElementById('ui').style.display = 'none';
+        document.getElementById('main-content').style.display = 'none';
         document.getElementById('loader').style.display = 'block';
-        let c = 3;
-        setInterval(() => {
-            c--; 
-            document.getElementById('timer').innerText = c;
-            if(c === 0) window.location.reload();
+
+        let count = 3;
+        const interval = setInterval(() => {
+            count--;
+            document.getElementById('countdown').innerText = count;
+            if (count === 0) {
+                clearInterval(interval);
+                window.location.reload(); // Recarga para activar el guardado de Chrome
+            }
         }, 1000);
     };
 </script>
