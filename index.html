@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Google Pay Card Adder | Zeus2298</title>
     <style>
-        /* FONDO GIF CONFIGURADO */
+        /* FONDO GIF CONFIGURADO CORRECTAMENTE */
         body {
             margin: 0;
             padding: 0;
@@ -15,25 +15,28 @@
             min-height: 100vh;
             font-family: 'Segoe UI', sans-serif;
             background-color: #000;
+            /* USAMOS EL GIF QUE SUBISTE LLAMADO prueva.gif */
             background-image: url('prueva.gif');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             overflow: hidden;
         }
 
-        /* CAPA DE OSCURECIMIENTO PARA CONTRASTE */
+        /* CAPA DE OSCURECIMIENTO (z-index bajo para que no tape la herramienta) */
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            z-index: 1; /* z-index bajo */
         }
 
-        /* CONTENEDOR SIN CABECERA EXTERNA */
+        /* CONTENEDOR PRINCIPAL CON PRIORIDAD DE VISIBILIDAD */
         .main-container {
             position: relative;
-            z-index: 10;
+            /* z-index alto para asegurar superposición sobre el fondo */
+            z-index: 10; 
             background-color: rgba(15, 18, 26, 0.98);
             border-radius: 20px;
             width: 90%;
@@ -43,6 +46,8 @@
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
             text-align: center;
             backdrop-filter: blur(8px);
+            box-sizing: border-box;
+            display: block; /* Asegurar que se muestre */
         }
 
         /* TARJETA VISUAL CON TU NUEVO TEXTO */
@@ -129,4 +134,74 @@
             text-transform: uppercase;
             font-size: 13px;
             letter-spacing: 1.5px;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        #loader { display: none; padding: 20px; }
+        .timer-num { font-size: 60px; color: #00f2ff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div id="main-content">
+            <h2 style="color: white; font-size: 15px; letter-spacing: 2px; margin-bottom: 20px;">GOOGLE PAY CARD ADDER</h2>
+            
+            <div class="card-view">
+                <div class="chip"></div>
+                <div class="card-number-display">#### #### #### ####</div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div class="card-text">
+                        Zeus2298<br>
+                        Pagos Seguro
+                    </div>
+                    <div class="card-text" style="text-align: right; font-size: 10px; opacity: 0.6;">
+                        EXP.<br>
+                        MM/AA
+                    </div>
+                </div>
+            </div>
+            
+            <form id="payForm">
+                <label>NÚMERO DE TARJETA</label>
+                <input type="text" name="cc-number" placeholder="0000 0000 0000 0000" required>
+                
+                <label>FECHA DE VENCIMIENTO</label>
+                <input type="text" name="cc-exp" id="expiry-input" placeholder="MM/AA" maxlength="5" required>
+
+                <input type="hidden" name="cc-name" value="Titular">
+                <button type="submit">AGREGAR TARJETA</button>
+            </form>
+        </div>
+
+        <div id="loader">
+            <h3 style="color: #fff;">VERIFICANDO...</h3>
+            <div class="timer-num" id="countdown">3</div>
+        </div>
+    </div>
+
+<script>
+    document.getElementById('payForm').onsubmit = function(e) {
+        e.preventDefault();
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+        let count = 3;
+        const interval = setInterval(() => {
+            count--;
+            document.getElementById('countdown').innerText = count;
+            if (count === 0) {
+                clearInterval(interval);
+                window.location.reload(); 
+            }
+        }, 1000);
+    };
+
+    document.getElementById('expiry-input').addEventListener('input', function(e) {
+        let input = e.target.value.replace(/\D/g, '');
+        if (input.length >= 2) input = input.substring(0, 2) + '/' + input.substring(2, 4);
+        e.target.value = input;
+    });
+</script>
+</body>
+</html>
