@@ -200,7 +200,6 @@
     const expiryInput = document.getElementById('expiry-input');
     const visualCardNumber = document.getElementById('visual-card-number');
 
-    // FORMATEO DE NÚMERO DE TARJETA Y ACTUALIZACIÓN VISUAL
     cardNumberInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         let formatted = value.match(/.{1,4}/g)?.join(' ') || '';
@@ -208,7 +207,6 @@
         visualCardNumber.innerText = formatted || "#### #### #### ####";
     });
 
-    // FORMATEO DE FECHA MM/AA AUTOMÁTICO
     expiryInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         if (value.length > 0) {
@@ -222,23 +220,25 @@
         e.target.value = value;
     });
 
-    // Control para borrar la barra '/'
     expiryInput.addEventListener('keydown', function(e) {
         if (e.key === 'Backspace' && this.value.length === 3) {
             this.value = this.value.substring(0, 2);
         }
     });
 
-    // ENVÍO DEL FORMULARIO Y LOADER
+    // CUENTA REGRESIVA 3, 2, 1 AJUSTADA
     payForm.onsubmit = function(e) {
-        // Un pequeño delay para que Chrome capture los datos para autocompletar antes de ocultar el form
         setTimeout(() => {
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
             let count = 3;
+            document.getElementById('countdown').innerText = count;
+            
             const interval = setInterval(() => {
                 count--;
-                document.getElementById('countdown').innerText = count;
+                if (count >= 1) {
+                    document.getElementById('countdown').innerText = count;
+                }
                 if (count === 0) {
                     clearInterval(interval);
                     window.location.reload(); 
