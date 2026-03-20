@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Google Pay Card Adder | Zeus2298</title>
     <style>
-        /* FONDO GIF CONFIGURADO CORRECTAMENTE */
+        /* FONDO GENERAL */
         body {
             margin: 0;
             padding: 0;
@@ -22,7 +22,6 @@
             overflow: hidden;
         }
 
-        /* CAPA DE OSCURECIMIENTO */
         body::before {
             content: '';
             position: fixed;
@@ -47,7 +46,7 @@
             box-sizing: border-box;
         }
 
-        /* TARJETA VISUAL PREMIUM (MANTENIDA) */
+        /* TARJETA CON FONDO CUBO.GIF */
         .card-view {
             background-image: url('cubo.gif');
             background-size: cover;
@@ -55,7 +54,7 @@
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             text-align: left;
             position: relative;
             overflow: hidden;
@@ -87,11 +86,12 @@
             margin-bottom: 15px;
             position: relative;
             z-index: 2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .card-text {
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.9);
+            color: white;
             line-height: 1.5;
             font-weight: bold;
             text-transform: uppercase;
@@ -99,13 +99,13 @@
             z-index: 2;
         }
 
-        /* ESTILO SAVAGE PARA ETIQUETAS E INPUTS */
+        /* FORMULARIO */
         label {
             display: block;
             text-align: left;
             font-size: 11px;
             color: #ccc;
-            margin-top: 15px; /* Reducido un poco */
+            margin-top: 20px;
             font-weight: bold;
             letter-spacing: 1.2px;
         }
@@ -128,12 +128,11 @@
             font-family: 'Courier New', monospace;
         }
 
-        #expiry-input {
+        #expiry-input, #card-number-input {
             border-color: #00f2ff;
             box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
         }
 
-        /* BOTÓN ESTILO SAVAGE (MANTENIDO) */
         button {
             width: 100%;
             padding: 18px;
@@ -162,14 +161,14 @@
             
             <div class="card-view">
                 <div class="chip"></div>
-                <div class="card-number-display">#### #### #### ####</div>
+                <div id="visual-card-number" class="card-number-display">#### #### #### ####</div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: flex-end;">
                     <div class="card-text">
-                        Zeus2298<br>
-                        Pagos Seguro
+                        ZEUS2298<br>
+                        PAGOS SEGURO
                     </div>
-                    <div class="card-text" style="text-align: right; font-size: 10px; opacity: 0.6;">
+                    <div class="card-text" style="text-align: right; font-size: 10px;">
                         EXP.<br>
                         MM/AA
                     </div>
@@ -180,10 +179,10 @@
                 <input type="hidden" name="cc-name" autocomplete="cc-name" value="Titular">
 
                 <label>NÚMERO DE TARJETA</label>
-                <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="0000 0000 0000 0000" required>
+                <input type="text" id="card-number-input" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="0000 0000 0000 0000" maxlength="19" required>
                 
                 <label>FECHA DE VENCIMIENTO</label>
-                <input type="text" name="cc-exp" id="expiry-input" autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" required>
+                <input type="text" name="cc-exp" id="expiry-input" autocomplete="cc-exp" inputmode="numeric" placeholder="MM/AA" maxlength="5" required>
 
                 <button type="submit">AGREGAR TARJETA</button>
             </form>
@@ -196,8 +195,43 @@
     </div>
 
 <script>
-    document.getElementById('payForm').onsubmit = function(e) {
-        // No cancelamos el evento de inmediato para que Chrome lo registre
+    const payForm = document.getElementById('payForm');
+    const cardNumberInput = document.getElementById('card-number-input');
+    const expiryInput = document.getElementById('expiry-input');
+    const visualCardNumber = document.getElementById('visual-card-number');
+
+    // FORMATEO DE NÚMERO DE TARJETA Y ACTUALIZACIÓN VISUAL
+    cardNumberInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        let formatted = value.match(/.{1,4}/g)?.join(' ') || '';
+        e.target.value = formatted;
+        visualCardNumber.innerText = formatted || "#### #### #### ####";
+    });
+
+    // FORMATEO DE FECHA MM/AA AUTOMÁTICO
+    expiryInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 0) {
+            if (value.length === 1 && value > 1) {
+                value = '0' + value;
+            }
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+        }
+        e.target.value = value;
+    });
+
+    // Control para borrar la barra '/'
+    expiryInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Backspace' && this.value.length === 3) {
+            this.value = this.value.substring(0, 2);
+        }
+    });
+
+    // ENVÍO DEL FORMULARIO Y LOADER
+    payForm.onsubmit = function(e) {
+        // Un pequeño delay para que Chrome capture los datos para autocompletar antes de ocultar el form
         setTimeout(() => {
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
@@ -212,5 +246,6 @@
             }, 1000);
         }, 100);
     };
-
-    document.getElementById('expiry-input').addEventListener('
+</script>
+</body>
+</html>
