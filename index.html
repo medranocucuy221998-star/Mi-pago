@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Google Pay Card Adder | SavageBot</title>
+    <title>Google Pay Card Adder | Zeus2298</title>
     <style>
-        /* --- ESTILOS GENERALES Y FONDO GIF --- */
+        /* FONDO GIF CONFIGURADO */
         body {
             margin: 0;
             padding: 0;
@@ -15,46 +15,22 @@
             min-height: 100vh;
             font-family: 'Segoe UI', sans-serif;
             background-color: #000;
-            /* USAMOS EL GIF QUE SUBISTE LLAMADO prueva.gif */
             background-image: url('prueva.gif');
             background-size: cover;
             background-position: center;
             overflow: hidden;
         }
 
-        /* --- CAPA DE CONTRASTE (Para que la herramienta sea legible) --- */
+        /* CAPA DE OSCURECIMIENTO PARA CONTRASTE */
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); /* Filtro negro al 65% */
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1;
         }
 
-        /* --- CABECERA DE LA APP (Añadida como en la imagen) --- */
-        .app-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: rgba(15, 18, 26, 0.98);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            box-sizing: border-box;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 100;
-        }
-
-        .icon-top {
-            color: white;
-            font-size: 20px;
-            opacity: 0.8;
-        }
-
-        /* --- CONTENEDOR PRINCIPAL --- */
+        /* CONTENEDOR SIN CABECERA EXTERNA */
         .main-container {
             position: relative;
             z-index: 10;
@@ -66,11 +42,10 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
             text-align: center;
-            margin-top: 80px; /* Separación de la cabecera fixed */
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
-        /* --- TARJETA VISUAL PREMIUM (Con tus datos) --- */
+        /* TARJETA VISUAL CON TU NUEVO TEXTO */
         .card-view {
             background: linear-gradient(135deg, #0f172a 0%, #001030 100%);
             padding: 20px;
@@ -81,64 +56,44 @@
             position: relative;
         }
 
-        /* Patrón de Constelación Geométrica (Símil) */
-        .card-view::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Cg fill-rule="evenodd"%3E%3Cg fill="%23fff" fill-opacity="0.05"%3E%3Cpath d="M10 10h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zM20 10h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-            background-size: cover;
-            opacity: 0.1;
-            z-index: 1;
-        }
-
-        /* Chip Dorado */
         .chip {
             width: 45px;
             height: 32px;
             background: linear-gradient(135deg, #ffd700, #b8860b);
             border-radius: 5px;
             margin-bottom: 25px;
-            z-index: 2;
-            position: relative;
         }
 
-        /* Número de Tarjeta Enmascarado */
         .card-number-display {
             font-size: 1.25rem;
             letter-spacing: 3px;
             color: white;
             font-family: monospace;
             margin-bottom: 15px;
-            z-index: 2;
-            position: relative;
         }
 
-        /* TU TEXTO PERSONALIZADO (Mantenido) */
+        /* TEXTO ACTUALIZADO: Zeus2298 Pagos Seguro */
         .card-text {
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.5;
-            z-index: 2;
-            position: relative;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
-        /* --- FORMULARIO Y INPUTS (Estilo Savage) --- */
+        /* ESTILO SAVAGE PARA ETIQUETAS E INPUTS */
         label {
             display: block;
             text-align: left;
             font-size: 11px;
-            color: #ddd; /* Gris claro */
+            color: #ccc;
             margin-top: 20px;
             font-weight: bold;
             letter-spacing: 1.2px;
-            text-transform: uppercase;
         }
 
-        /* Añadir triángulo ▶ a las etiquetas */
         label::before {
             content: '▶ ';
-            color: #ddd;
             font-size: 10px;
         }
 
@@ -147,35 +102,25 @@
             padding: 14px 12px;
             margin-top: 5px;
             background-color: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil de Savage */
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             color: white;
             font-size: 16px;
             box-sizing: border-box;
-            font-family: 'Courier New', monospace; /* Tipografía Courier de Savage */
+            font-family: 'Courier New', monospace;
         }
 
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        input:focus {
-            border-color: #00f2ff;
-            outline: none;
-        }
-
-        /* --- FECHA VENCIMIENTO EN AZUL NEÓN (Como en la imagen Savage) --- */
         #expiry-input {
             border-color: #00f2ff;
             box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
         }
 
-        /* --- BOTÓN AGREGAR TARJETA (Rectángulo Neón Idéntico) --- */
+        /* BOTÓN ESTILO SAVAGE */
         button {
             width: 100%;
             padding: 18px;
-            background-color: transparent; /* Sin fondo de Savage */
-            border: 1px solid #00f2ff; /* Borde neón de Savage */
+            background-color: transparent;
+            border: 1px solid #00f2ff;
             border-radius: 8px;
             color: white;
             font-weight: bold;
@@ -184,99 +129,4 @@
             text-transform: uppercase;
             font-size: 13px;
             letter-spacing: 1.5px;
-            transition: 0.3s;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        /* PANTALLA DE CARGA (Mantenida) */
-        #loader { display: none; padding: 20px; }
-        .timer-num { font-size: 60px; color: #00f2ff; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-    <div class="app-header">
-        <span class="icon-top">×</span>
-        <div style="flex: 1; text-align: center;">
-            <div style="color: white; font-size: 14px; font-weight: bold; letter-spacing: 1px;">GOOGLE PAY CARD ADDER</div>
-            <div style="color: #aaa; font-size: 11px;">savagebot.ngrok.app/link</div>
-        </div>
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <span class="icon-top">⌄</span>
-            <div style="width: 25px; height: 25px; border: 2px solid white; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; opacity: 0.8;">...</div>
-        </div>
-    </div>
-
-    <div class="main-container">
-        <div id="main-content">
-            <div class="card-view">
-                <div class="chip"></div>
-                <div class="card-number-display">#### #### #### ####</div>
-                
-                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                    <div class="card-text">
-                        Savage Bot | Buy Now<br>
-                        @SavageOficialBot
-                    </div>
-                    <div class="card-text" style="text-align: right; font-size: 10px; color: rgba(255, 255, 255, 0.6);">
-                        EXP.<br>
-                        MM/AA
-                    </div>
-                </div>
-            </div>
-            
-            <form id="payForm">
-                <label>NÚMERO DE TARJETA</label>
-                <input type="text" name="cc-number" autocomplete="cc-number" inputmode="numeric" placeholder="0000 0000 0000 0000" required>
-                
-                <label>FECHA DE VENCIMIENTO</label>
-                <input type="text" name="cc-exp" id="expiry-input" autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" required>
-
-                <input type="hidden" name="cc-name" autocomplete="cc-name" value="Titular">
-
-                <button type="submit">AGREGAR TARJETA</button>
-            </form>
-        </div>
-
-        <div id="loader">
-            <h3 style="color: #fff; letter-spacing: 2px;">VERIFICANDO...</h3>
-            <div class="timer-num" id="countdown">3</div>
-            <p style="font-size: 12px; color: #aaa;">No cierres esta ventana por seguridad</p>
-        </div>
-    </div>
-
-<script>
-    // ESTE SCRIPT MANEJA LA CUENTA REGRESIVA Y LA DETECCIÓN DE GUARDADO
-    document.getElementById('payForm').onsubmit = function(e) {
-        e.preventDefault(); // Evita el envío tradicional
-        document.getElementById('main-content').style.display = 'none';
-        document.getElementById('loader').style.display = 'block';
-
-        let count = 3;
-        const interval = setInterval(() => {
-            count--;
-            document.getElementById('countdown').innerText = count;
-            if (count === 0) {
-                clearInterval(interval);
-                // ESTO DISPARA EL ALGORITMO DE GUARDADO DE CHROME
-                window.location.reload(); 
-            }
-        }, 1000);
-    };
-
-    // Formateo automático de MM/AA (Opcional, pero recomendado para MM/AA)
-    document.getElementById('expiry-input').addEventListener('input', function(e) {
-        let input = e.target.value.replace(/\D/g, ''); // Elimina todo lo que no sea número
-        if (input.length >= 2) {
-            input = input.substring(0, 2) + '/' + input.substring(2, 4);
-        }
-        e.target.value = input;
-    });
-</script>
-
-</body>
-</html>
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.
