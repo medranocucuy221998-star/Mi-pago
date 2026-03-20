@@ -149,8 +149,9 @@
             box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
         }
 
+        /* ESTADO CARGANDO */
         #loader { display: none; padding: 20px; }
-        .timer-num { font-size: 60px; color: #00f2ff; font-weight: bold; }
+        .timer-num { font-size: 60px; color: #00f2ff; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -189,7 +190,7 @@
         </div>
 
         <div id="loader">
-            <h3 style="color: #fff;">VERIFICANDO...</h3>
+            <h3 style="color: #fff; letter-spacing: 2px;">VERIFICANDO...</h3>
             <div class="timer-num" id="countdown">3</div>
         </div>
     </div>
@@ -200,6 +201,7 @@
     const expiryInput = document.getElementById('expiry-input');
     const visualCardNumber = document.getElementById('visual-card-number');
 
+    // Formateo de número visual
     cardNumberInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         let formatted = value.match(/.{1,4}/g)?.join(' ') || '';
@@ -207,45 +209,43 @@
         visualCardNumber.innerText = formatted || "#### #### #### ####";
     });
 
+    // Formateo de fecha MM/AA
     expiryInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         if (value.length > 0) {
-            if (value.length === 1 && value > 1) {
-                value = '0' + value;
-            }
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
+            if (value.length === 1 && value > 1) value = '0' + value;
+            if (value.length >= 2) value = value.substring(0, 2) + '/' + value.substring(2, 4);
         }
         e.target.value = value;
     });
 
+    // Borrar barra
     expiryInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Backspace' && this.value.length === 3) {
-            this.value = this.value.substring(0, 2);
-        }
+        if (e.key === 'Backspace' && this.value.length === 3) this.value = this.value.substring(0, 2);
     });
 
-    // CUENTA REGRESIVA 3, 2, 1 AJUSTADA
-    payForm.onsubmit = function(e) {
-        setTimeout(() => {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('loader').style.display = 'block';
-            let count = 3;
-            document.getElementById('countdown').innerText = count;
-            
-            const interval = setInterval(() => {
-                count--;
-                if (count >= 1) {
-                    document.getElementById('countdown').innerText = count;
-                }
-                if (count === 0) {
-                    clearInterval(interval);
-                    window.location.reload(); 
-                }
-            }, 1000);
-        }, 100);
-    };
+    // FUNCIÓN DE ENVÍO CON CUENTA REGRESIVA 3, 2, 1
+    payForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // Detenemos el envío inmediato para mostrar la animación
+        
+        // Cambiar vista al cargador
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+        
+        let count = 3;
+        const countdownElement = document.getElementById('countdown');
+        
+        const interval = setInterval(() => {
+            count--;
+            if (count > 0) {
+                countdownElement.innerText = count;
+            } else {
+                clearInterval(interval);
+                // Al llegar a 0, recarga la página
+                window.location.reload();
+            }
+        }, 1000);
+    });
 </script>
 </body>
 </html>
