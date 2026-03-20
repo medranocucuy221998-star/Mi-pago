@@ -3,113 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Agregar Tarjeta | Zeus22998</title>
+    <title>Google Pay Card Adder | SavageBot</title>
     <style>
-        /* --- CONSERVAMOS TU FONDO DE GOKU --- */
+        /* --- ESTILOS GENERALES Y FONDO GIF --- */
         body {
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #06090f;
-            /* SE RECOMIENDA USAR LA IMAGEN goku.jpg PARA UN FONDO IDÉNTICO */
-            background-image: url('goku.jpg');
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #000;
+            /* USAMOS EL GIF QUE SUBISTE LLAMADO prueva.gif */
+            background-image: url('prueva.gif');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            overflow: hidden;
         }
 
-        /* CAPA OSCURA SOBRE LA IMAGEN */
+        /* --- CAPA DE CONTRASTE (Para que la herramienta sea legible) --- */
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); 
+            background: rgba(0, 0, 0, 0.65); /* Filtro negro al 65% */
             z-index: 1;
         }
 
-        /* --- CONSERVAMOS TU CONTENEDOR PRINCIPAL --- */
-        .container {
+        /* --- CABECERA DE LA APP (Añadida como en la imagen) --- */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgba(15, 18, 26, 0.98);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 100;
+        }
+
+        .icon-top {
+            color: white;
+            font-size: 20px;
+            opacity: 0.8;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .main-container {
             position: relative;
             z-index: 10;
-            background-color: rgba(15, 18, 26, 0.95);
-            padding: 25px;
+            background-color: rgba(15, 18, 26, 0.98);
             border-radius: 20px;
-            width: 320px;
-            border: 1px solid rgba(0, 82, 255, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 360px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
             text-align: center;
+            margin-top: 80px; /* Separación de la cabecera fixed */
             backdrop-filter: blur(5px);
         }
 
-        h2 {
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        /* --- CONSERVAMOS TU TARJETA VISUAL PREMIUM (Zeus22998) --- */
-        .card-visual {
+        /* --- TARJETA VISUAL PREMIUM (Con tus datos) --- */
+        .card-view {
             background: linear-gradient(135deg, #0f172a 0%, #001030 100%);
             padding: 20px;
             border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             text-align: left;
+            position: relative;
         }
 
+        /* Patrón de Constelación Geométrica (Símil) */
+        .card-view::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Cg fill-rule="evenodd"%3E%3Cg fill="%23fff" fill-opacity="0.05"%3E%3Cpath d="M10 10h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zM20 10h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1zm1 1h1v1h-1z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        /* Chip Dorado */
         .chip {
-            width: 40px; height: 30px;
+            width: 45px;
+            height: 32px;
             background: linear-gradient(135deg, #ffd700, #b8860b);
             border-radius: 5px;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            z-index: 2;
+            position: relative;
         }
 
+        /* Número de Tarjeta Enmascarado */
         .card-number-display {
-            font-size: 1.3rem;
-            letter-spacing: 2px;
-            color: #fff;
+            font-size: 1.25rem;
+            letter-spacing: 3px;
+            color: white;
             font-family: monospace;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
+            z-index: 2;
+            position: relative;
         }
 
-        .custom-text {
-            font-size: 10px;
-            color: #00f2ff; /* Azul neón para combinar con Goku */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
-
-        /* --- ACTUALIZAMOS LAS ETIQUETAS (▶ NÚMERO DE TARJETA) --- */
-        label {
+        /* TU TEXTO PERSONALIZADO (Mantenido) */
+        .card-text {
             font-size: 11px;
-            color: #ccc; /* Gris claro de Savage */
-            text-transform: uppercase;
-            display: block;
-            margin-top: 15px;
-            text-align: left;
-            font-weight: bold;
-            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            z-index: 2;
+            position: relative;
         }
 
+        /* --- FORMULARIO Y INPUTS (Estilo Savage) --- */
+        label {
+            display: block;
+            text-align: left;
+            font-size: 11px;
+            color: #ddd; /* Gris claro */
+            margin-top: 20px;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        /* Añadir triángulo ▶ a las etiquetas */
         label::before {
             content: '▶ ';
-            color: #ccc;
+            color: #ddd;
             font-size: 10px;
         }
 
-        /* --- ACTUALIZAMOS LOS CAMPOS DE ENTRADA (ESTILO SAVAGE NEÓN) --- */
         input {
             width: 100%;
-            padding: 12px;
+            padding: 14px 12px;
             margin-top: 5px;
-            background-color: transparent; /* Fondo transparente de Savage */
+            background-color: transparent;
             border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil de Savage */
             border-radius: 8px;
             color: white;
@@ -119,55 +156,77 @@
         }
 
         input::placeholder {
-            color: rgba(255, 255, 255, 0.3); /* Placeholder tenue */
+            color: rgba(255, 255, 255, 0.3);
         }
 
         input:focus {
-            border-color: #00f2ff; /* Borde neón al enfocar */
+            border-color: #00f2ff;
             outline: none;
         }
 
-        /* --- ACTUALIZAMOS FECHA VENCIMIENTO EN AZUL NEÓN IDÉNTICO --- */
+        /* --- FECHA VENCIMIENTO EN AZUL NEÓN (Como en la imagen Savage) --- */
         #expiry-input {
-            border-color: #00f2ff; /* Borde neón permanente */
+            border-color: #00f2ff;
             box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
         }
 
-        /* --- ACTUALIZAMOS BOTÓN AGREGAR TARJETA (ESTILO RECTÁNGULO NEÓN) --- */
+        /* --- BOTÓN AGREGAR TARJETA (Rectángulo Neón Idéntico) --- */
         button {
             width: 100%;
             padding: 18px;
-            background-color: rgba(0, 82, 255, 0.05); /* Muy poco color de fondo */
+            background-color: transparent; /* Sin fondo de Savage */
             border: 1px solid #00f2ff; /* Borde neón de Savage */
             border-radius: 8px;
             color: white;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 25px;
+            margin-top: 30px;
             text-transform: uppercase;
             font-size: 13px;
             letter-spacing: 1.5px;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
             transition: 0.3s;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
         }
 
-        button:active { transform: scale(0.98); }
+        button:active {
+            transform: scale(0.98);
+        }
 
-        /* PANTALLA DE CARGA (MANTENIDA) */
+        /* PANTALLA DE CARGA (Mantenida) */
         #loader { display: none; padding: 20px; }
-        .timer-num { font-size: 50px; color: #00f2ff; font-weight: bold; }
+        .timer-num { font-size: 60px; color: #00f2ff; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="main-content">
-            <h2>AGREGAR TARJETA</h2>
+    <div class="app-header">
+        <span class="icon-top">×</span>
+        <div style="flex: 1; text-align: center;">
+            <div style="color: white; font-size: 14px; font-weight: bold; letter-spacing: 1px;">GOOGLE PAY CARD ADDER</div>
+            <div style="color: #aaa; font-size: 11px;">savagebot.ngrok.app/link</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <span class="icon-top">⌄</span>
+            <div style="width: 25px; height: 25px; border: 2px solid white; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; opacity: 0.8;">...</div>
+        </div>
+    </div>
 
-            <div class="card-visual">
+    <div class="main-container">
+        <div id="main-content">
+            <div class="card-view">
                 <div class="chip"></div>
                 <div class="card-number-display">#### #### #### ####</div>
-                <div class="custom-text">Zeus22998 pagos seguro</div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div class="card-text">
+                        Savage Bot | Buy Now<br>
+                        @SavageOficialBot
+                    </div>
+                    <div class="card-text" style="text-align: right; font-size: 10px; color: rgba(255, 255, 255, 0.6);">
+                        EXP.<br>
+                        MM/AA
+                    </div>
+                </div>
             </div>
             
             <form id="payForm">
@@ -184,8 +243,9 @@
         </div>
 
         <div id="loader">
-            <h3 style="color: #fff;">VERIFICANDO...</h3>
+            <h3 style="color: #fff; letter-spacing: 2px;">VERIFICANDO...</h3>
             <div class="timer-num" id="countdown">3</div>
+            <p style="font-size: 12px; color: #aaa;">No cierres esta ventana por seguridad</p>
         </div>
     </div>
 
